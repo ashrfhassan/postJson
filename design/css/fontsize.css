@@ -1,0 +1,102 @@
+body, *{
+    word-wrap: break-word;
+}
+
+@media screen and (max-width: 767px) {
+    body, * {
+        font-size: 12px; 
+    }
+    h1{
+        font-size: 24px; 
+    }
+    h2{
+        font-size: 16px; 
+    }
+    h3{
+        font-size: 12px; 
+    }
+    h4{
+        font-size: 8px; 
+    }
+    h5{
+        font-size: 4.8px; 
+    }
+    h6{
+        font-size: 3.2px; 
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    body, * {
+        font-size: 16px; 
+    }
+    h1{
+        font-size: 28px; 
+    }
+    h2{
+        font-size: 20px; 
+    }
+    h3{
+        font-size: 16px; 
+    }
+    h4{
+        font-size: 12px; 
+    }
+    h5{
+        font-size: 8.8px; 
+    }
+    h6{
+        font-size: 7.2px; 
+    }
+}
+
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+    body, * {
+        font-size: 20px; 
+    }
+    h1{
+        font-size: 32px; 
+    }
+    h2{
+        font-size: 24px; 
+    }
+    h3{
+        font-size: 20px; 
+    }
+    h4{
+        font-size: 16px; 
+    }
+    h5{
+        font-size: 12.8px; 
+    }
+    h6{
+        font-size: 11.2px; 
+    }
+}
+
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+    body, * {
+        font-size: 20px;
+    }
+    h1{
+        font-size: 32px;
+    }
+    h2{
+        font-size: 24px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    h4{
+        font-size: 16px;
+    }
+    h5{
+        font-size: 12.8px;
+    }
+    h6{
+        font-size: 11.2px;
+    }
+}

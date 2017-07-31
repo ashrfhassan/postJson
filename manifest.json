@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "PostJson",
+  "description": "This chrome app Allows You To Test APIs And Creating Documentation For Them",
+  "version": "1.0",
+
+  "icons" :{
+    "64":"icon.png"
+  },
+    "background": {
+      "scripts": [
+
+      ]
+    }
+  ,
+  "permissions": [
+    "storage",
+    "system.storage",
+    "gcm",
+    "http://*/",
+    "https://*/"
+  ],
+  "browser_action": {
+    "default_title": "postJson",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

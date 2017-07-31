@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <title>Post Json</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body, *{
+            word-wrap: break-word;
+        }
+
+        @media screen and (max-width: 767px) {
+            body, * {
+                font-size: 12px; !important;
+            }
+            h1{
+                font-size: 24px; !important;
+            }
+            h2{
+                font-size: 16px; !important;
+            }
+            h3{
+                font-size: 12px; !important;
+            }
+            h4{
+                font-size: 8px; !important;
+            }
+            h5{
+                font-size: 4.8px; !important;
+            }
+            h6{
+                font-size: 3.2px; !important;
+            }
+        }
+
+        /* Small devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            body, * {
+                font-size: 16px; !important;
+            }
+            h1{
+                font-size: 28px; !important;
+            }
+            h2{
+                font-size: 20px; !important;
+            }
+            h3{
+                font-size: 16px; !important;
+            }
+            h4{
+                font-size: 12px; !important;
+            }
+            h5{
+                font-size: 8.8px; !important;
+            }
+            h6{
+                font-size: 7.2px; !important;
+            }
+        }
+
+        /* tablets/desktops and up ----------- */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            body, * {
+                font-size: 20px; !important;
+            }
+            h1{
+                font-size: 32px; !important;
+            }
+            h2{
+                font-size: 24px; !important;
+            }
+            h3{
+                font-size: 20px; !important;
+            }
+            h4{
+                font-size: 16px; !important;
+            }
+            h5{
+                font-size: 12.8px; !important;
+            }
+            h6{
+                font-size: 11.2px; !important;
+            }
+        }
+
+        /* large desktops and up ----------- */
+        @media screen and (min-width: 1200px) {
+            body, * {
+                font-size: 20px;
+            !important;
+            }
+
+            h1 {
+                font-size: 32px;
+            !important;
+            }
+
+            h2 {
+                font-size: 24px;
+            !important;
+            }
+
+            h3 {
+                font-size: 20px;
+            !important;
+            }
+
+            h4 {
+                font-size: 16px;
+            !important;
+            }
+
+            h5 {
+                font-size: 12.8px;
+            !important;
+            }
+
+            h6 {
+                font-size: 11.2px;
+            !important;
+            }
+        }
+    </style>
+    <style>
+        #sidebar{
+            background-color: snow;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 99;
+        }
+        #sidebar::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #a4c2f4;
+        }
+
+        #sidebar::-webkit-scrollbar
+        {
+            width: 12px;
+            background-color: #a4c2f4;
+        }
+
+        #sidebar::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #2f6fa8;
+        }
+        a{
+            text-decoration: none;
+            color: #006699;
+            font-weight: bold;
+        }
+        a:hover{
+            text-decoration: none;
+            color: grey;
+        }
+        hr{
+            height: 1px;
+            color: #9999ff;
+            background-color: #9999ff;
+        }
+        .api-data h1{
+            font-weight: bold;
+            color: #006699;
+        }
+        .api-data p{
+            color: #8d8d8d;
+        }
+        .panel-body span{
+            color: #a4c2f4;
+        }
+        .panel-body p{
+            font-weight: bold;
+            color : #6699cc;
+        }
+        .panel-body p i{
+            color : #9999ff;
+        }
+        .header-caption{
+            font-weight: bold;
+            color: #006699;
+        }
+        .left-border{
+            border-left: solid 5px;
+            border-color: #009999;
+        }
+        .right-border{
+            border-right: solid 5px;
+            border-color: #009999;
+        }
+        .top-border{
+            border-top: solid 5px;
+            border-color: #009999;
+        }
+        .bottom-border{
+            border-bottom: solid 5px;
+            border-color: #009999;
+        }
+
+        .margin-data{
+            margin: 13px;
+        }
+        .row-back-color{
+            background-color: #a4c2f4;
+        }
+        .definition{
+            background-color: snow;
+        }
+        pre{
+            background-color: ghostwhite;
+            border: 1px solid silver;
+            text-align: left !important;
+        }
+        .json-key {
+            color:#e2b91e;
+        }
+
+        .json-value {
+            color: blue;
+        }
+
+        .json-string {
+            color: #2f6fa8;
+        }
+        .text-break{
+            word-wrap: break-word;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="text-center navbar-fixed-top" style="z-index: 99">
+    <div class="panel panel-default text-center" style="margin-bottom: 0">
+        <div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>
+    </div>
+</header>
+
+<div id="main-body" class="container-fluid">
+     <div id="main-row" class="row">
+         <div id="sidebar" class="col-md-3 col-sm-3 col-xs-3">
+             <br>
+             <div class="row text-center">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
+                     <a href="#1">Hello</a>
+                 </div>
+             </div>
+             <hr>
+         </div>
+         <div class="col-md-7 col-sm-7 col-xs-7 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+             <div class="row text-center">
+                 <h1 class="header-caption col-md-12 col-sm-12 col-xs-12">Project Name</h1>
+             </div>
+             <br><br>
+             <section id="1" class="full_api">
+             <div class="row api-data">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
+                     <h1>Api Name</h1>
+                     <p>Date Time</p>
+                 </div>
+             </div>
+             <div class="row row-back-color top-border left-border right-border">
+                 <div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>
+                 <div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">{"accesstoken":String,"verificationcode":String}</pre></div>
+             </div>
+             <div class="row row-back-color top-border left-border right-border">
+                 <div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>
+                 <div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">{"Error": int}</pre></div>
+             </div>
+             <div class="row row-back-color top-border left-border right-border bottom-border">
+                 <div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>
+                 <div class="col-md-9 col-sm-9 col-xs-9 left-border">
+                     <div class="row bottom-border">
+                         <div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">http://setioapi.fekracomputers.com/api/verifyuser</p></div>
+                     </div>
+                     <div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>
+                     <div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">{"accesstoken":"sg2trq4r1fkqmagfgl6sncmk1qgqlqi1","verificationcode":"422756"}</pre></div></div>
+                 </div>
+             </div>
+             </section>
+             <hr/>
+             <br>
+         </div>
+     </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("a").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function(){
+                    window.location.hash = hash;
+                });
+            }
+        });
+    });
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
