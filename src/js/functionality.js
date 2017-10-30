@@ -57,20 +57,26 @@ library.json = {
             .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
             .replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(jsonLine, library.json.replacer);
-        $.each(obj, function (key, value) {
-            if(value != null && value != "null") {
-                if (value.length >= 0 && typeof value == "object") {
-                    arrLength.push(value.length);
-                    indexOfBracket = objStringfy.indexOf('[', indexOfBracket);
-                    indexsOfBrackets.push(indexOfBracket);
-                    indexOfBracket += 1;
+        if (obj.length >= 0 && typeof obj == "object") {
+            arrLength.push(obj.length);
+            indexOfBracket = objStringfy.indexOf('[', indexOfBracket);
+            indexsOfBrackets.push(indexOfBracket);
+            indexOfBracket += 1;
+        } else {
+            $.each(obj, function (key, value) {
+                if (value != null && value != "null") {
+                    if (value.length >= 0 && typeof value == "object") {
+                        arrLength.push(value.length);
+                        indexOfBracket = objStringfy.indexOf('[', indexOfBracket);
+                        indexsOfBrackets.push(indexOfBracket);
+                        indexOfBracket += 1;
+                    }
                 }
-            }
-        });
+            });
+        }
         for (i = 0; i < arrLength.length; i++) {
             objStringfy = objStringfy.replaceAt(indexsOfBrackets[i], "array(" + arrLength[i] + ") [ ");
         }
-
         return objStringfy;
     },
     typeReplacer: function (match, pIndent, pKey, pVal, pEnd) {
@@ -104,16 +110,23 @@ library.json = {
         return r + (pEnd || '');
     },
     typePrettyPrint: function (obj) {
-        $.each(obj, function (key, value) {
-            if(value != null && value != "null") {
-                if (value.length >= 0 && typeof value == "object") {
-                    var length = value.length;
-                    for (var x = 1; x < length; x++) {
-                        value.pop();
+        if (obj.length >= 0 && typeof obj == "object") {
+            var length = obj.length;
+            for (var x = 1; x < length; x++) {
+                obj.pop();
+            }
+        } else {
+            $.each(obj, function (key, value) {
+                if (value != null && value != "null") {
+                    if (value.length >= 0 && typeof value == "object") {
+                        var length = value.length;
+                        for (var x = 1; x < length; x++) {
+                            value.pop();
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
         var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
         var objStringfy = JSON.stringify(obj, null, 3)
             .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
@@ -156,7 +169,7 @@ function send() {
 
     var getURL = $('#mainurl').val();
     if (getURL == "") {
-        UIkit.modal.alert('Enter Request URL First!').then(function() {
+        UIkit.modal.alert('Enter Request URL First!').then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
@@ -182,34 +195,34 @@ function send() {
                 // display output
                 $(".ld-ring").attr("hidden", "hidden");
                 var jsonForm = response;
-                var iframe   = document.getElementById('preview-row');
+                var iframe = document.getElementById('preview-row');
                 var frameDoc = iframe.document;
-                if(iframe.contentWindow)
+                if (iframe.contentWindow)
                     frameDoc = iframe.contentWindow.document; // IE
                 // Write into iframe
                 frameDoc.open();
-                if(typeof response != 'string') {
+                if (typeof response != 'string') {
                     var jsonFormString = JSON.stringify(jsonForm);
-                     jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
-                }else {
+                } else {
                     var jsonFormString = jsonForm;
-                    jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
                 }
                 frameDoc.close();
                 preventIframeEvents();
                 if (typeof response != 'string') {
                     $('#mainoutput').html(library.json.prettyPrint(jsonForm));
-                }else {
+                } else {
                     response = response.trim();
-                    if(response.charAt(0) == '{'){
+                    if (response.charAt(0) == '{') {
                         var jsonForm = JSON.parse(response);
                         $('#mainoutput').html(library.json.prettyPrint(jsonForm));
-                    }else{
-                        if(response.indexOf("<html") != -1){
-                            $('#mainoutput').html('<XMP>' + jsonForm +'</XMP>');
-                        }else {
+                    } else {
+                        if (response.indexOf("<html") != -1) {
+                            $('#mainoutput').html('<XMP>' + jsonForm + '</XMP>');
+                        } else {
                             $('#mainoutput').html(jsonForm);
                         }
                     }
@@ -250,23 +263,23 @@ function send() {
                 $(".ld-ring").attr("hidden", "hidden");
                 if (response["readyState"] == 4) {
                     var textResponse = response["responseText"];
-                    var iframe   = document.getElementById('preview-row');
+                    var iframe = document.getElementById('preview-row');
                     var frameDoc = iframe.document;
-                    if(iframe.contentWindow)
+                    if (iframe.contentWindow)
                         frameDoc = iframe.contentWindow.document; // IE
                     // Write into iframe
                     frameDoc.open();
                     var jsonFormString = textResponse;
-                    jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
                     frameDoc.close();
                     if (textResponse != "") {
-                        if(response["status"] == 405) {
+                        if (response["status"] == 405) {
                             $('#mainoutput').html('<XMP>' + textResponse + '</XMP>');
-                        }else {
+                        } else {
                             $('#mainoutput').html(textResponse);
                         }
-                    }else {
+                    } else {
                         $('#mainoutput').html(
                             '<div class="row">' +
                             '<div class="col-md-12 col-sm-12 col-xs-12">' +
@@ -365,7 +378,7 @@ function send() {
                         '</div>');
                     console.log(" 500 data still loading");
                 },
-                405:function () {
+                405: function () {
                     $('#code-status-card').text('405');
                     $('#code-status-card').css("background-color", "orange");
                     console.log(" 405 data still loading");
@@ -394,34 +407,34 @@ function send() {
                 $(".ld-ring").attr("hidden", "hidden");
 
                 var jsonForm = response;
-                var iframe   = document.getElementById('preview-row');
+                var iframe = document.getElementById('preview-row');
                 var frameDoc = iframe.document;
-                if(iframe.contentWindow)
+                if (iframe.contentWindow)
                     frameDoc = iframe.contentWindow.document; // IE
                 // Write into iframe
                 frameDoc.open();
-                if(typeof response != 'string') {
+                if (typeof response != 'string') {
                     var jsonFormString = JSON.stringify(jsonForm);
-                    jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
-                }else {
+                } else {
                     var jsonFormString = jsonForm;
-                    jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
                 }
                 frameDoc.close();
                 preventIframeEvents();
                 if (typeof response != 'string') {
                     $('#mainoutput').html(library.json.prettyPrint(jsonForm));
-                }else {
+                } else {
                     response = response.trim();
-                    if(response.charAt(0) == '{'){
+                    if (response.charAt(0) == '{') {
                         var jsonForm = JSON.parse(response);
                         $('#mainoutput').html(library.json.prettyPrint(jsonForm));
-                    }else{
-                        if(response.indexOf("<html") != -1){
-                            $('#mainoutput').html('<XMP>' + jsonForm +'</XMP>');
-                        }else {
+                    } else {
+                        if (response.indexOf("<html") != -1) {
+                            $('#mainoutput').html('<XMP>' + jsonForm + '</XMP>');
+                        } else {
                             $('#mainoutput').html(jsonForm);
                         }
                     }
@@ -463,23 +476,23 @@ function send() {
 
                 if (response["readyState"] == 4) {
                     var textResponse = response["responseText"];
-                    var iframe   = document.getElementById('preview-row');
+                    var iframe = document.getElementById('preview-row');
                     var frameDoc = iframe.document;
-                    if(iframe.contentWindow)
+                    if (iframe.contentWindow)
                         frameDoc = iframe.contentWindow.document; // IE
                     // Write into iframe
                     frameDoc.open();
                     var jsonFormString = textResponse;
-                    jsonFormString    = getRemovedHTMLScript(jsonFormString);
+                    jsonFormString = getRemovedHTMLScript(jsonFormString);
                     frameDoc.writeln(jsonFormString);
                     frameDoc.close();
                     if (textResponse != "") {
-                        if(response["status"] == 405) {
+                        if (response["status"] == 405) {
                             $('#mainoutput').html('<XMP>' + textResponse + '</XMP>');
-                        }else {
+                        } else {
                             $('#mainoutput').html(textResponse);
                         }
-                    }else {
+                    } else {
                         $('#mainoutput').html(
                             '<div class="row">' +
                             '<div class="col-md-12 col-sm-12 col-xs-12">' +
@@ -578,7 +591,7 @@ function send() {
                         '</div>');
                     console.log(" 500 data still loading");
                 },
-                405:function () {
+                405: function () {
                     $('#code-status-card').text('405');
                     $('#code-status-card').css("background-color", "orange");
                     console.log(" 405 data still loading");
@@ -598,7 +611,7 @@ function saveHistoryRequest(json) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
@@ -649,11 +662,12 @@ function retrieveHistoryAllRequest() {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -723,11 +737,12 @@ function retrieveHistoryRequest(requestKey) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -801,11 +816,12 @@ function removeHistoryRequest(requestKey) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -850,11 +866,12 @@ function saveProjectRequest(json) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -900,11 +917,12 @@ function retrieveProjectAllRequest() {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1014,7 +1032,7 @@ function retrieveProjectAllRequest() {
                     new SelectFx(el);
                 });
             })();
-            if($('div.cs-select').length > 1) {
+            if ($('div.cs-select').length > 1) {
                 var section = $('div.cs-select').eq(0).closest('section');
                 var newSelector = $('div.cs-select').eq(1);
                 $(section).prepend(newSelector);
@@ -1056,11 +1074,12 @@ function retrieveProjectRequest(requestKey) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1134,11 +1153,12 @@ function removeProjectRequest(requestKey) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1183,11 +1203,12 @@ function deleteProject(objectStoreName) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1222,11 +1243,12 @@ function checkProjectNameExists(projectName, json) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
     request.onsuccess = function (event) {
@@ -1284,7 +1306,7 @@ function checkProjectNameExists(projectName, json) {
                     $(lastProject).find('span.fa-bookmark').on("click", function () {
                         var projectPanel = $(this).closest('.panel-default');
                         var requestsCount = $(projectPanel).find('.fa-close').length;
-                        exportProject(projectPanel, requestsCount -1);
+                        exportProject(projectPanel, requestsCount - 1);
                     });
                     $('.cs-options ul').append('<li data-option="" data-value="' + projectname + '"><span>' + projectname + '</span></li>');
                     $('#project-selector').append('<option value="' + projectname + '">' + projectname + '</option>');
@@ -1300,7 +1322,7 @@ function checkProjectNameExists(projectName, json) {
                 }
                 saveProjectRequest(json);
             } else {
-                UIkit.modal.alert("Project Name Already Exists").then(function() {
+                UIkit.modal.alert("Project Name Already Exists").then(function () {
                     console.log('Confirmed.')
                 }, function () {
                     console.log('Rejected.')
@@ -1326,7 +1348,7 @@ function appendHistoryRequestAfterSave() {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
@@ -1415,11 +1437,12 @@ function appendProjectRequestAfterSave(projectName) {
     window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
     if (!window.indexedDB) {
-        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+        UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
             console.log('Confirmed.')
         }, function () {
             console.log('Rejected.')
-        });    }
+        });
+    }
 
     // created file to store databases
     var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1494,237 +1517,237 @@ function appendProjectRequestAfterSave(projectName) {
 }
 
 function getFullApiRow(name, dateTime, postStructure, outputStructure, exURL, exInput, key) {
-    return '<section id="#'+key+'" class="full_api">'+
-        '<div class="row text-center">'+
-        '<h1 class="header-caption col-md-12 col-sm-12 col-xs-12">'+name+'</h1>'+
-    '<br><br>'+
-    '<p class="brief-caption  col-md-12 col-sm-12 col-xs-12">'+dateTime+'</p>'+
-        '</div>'+
-        '<br><br>'+
-        '<div class="row row-back-color top-border left-border right-border">'+
-        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>'+
-    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">'+postStructure+'</pre></div>'+
-        '</div>'+
-        '<div class="row row-back-color top-border left-border right-border">'+
-        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>'+
-    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">'+outputStructure+'</pre></div>'+
-        '</div>'+
-        '<div class="row row-back-color top-border left-border right-border bottom-border">'+
-        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>'+
-        '<div class="col-md-9 col-sm-9 col-xs-9 left-border">'+
-        '<div class="row bottom-border">'+
-        '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">'+exURL+'</p></div></div>'+
-    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>'+
-    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">'+exInput+'</pre></div></div>'+
-        '</div>'+
-        '</div>'+
+    return '<section id="#' + key + '" class="full_api">' +
+        '<div class="row text-center">' +
+        '<h1 class="header-caption col-md-12 col-sm-12 col-xs-12">' + name + '</h1>' +
+        '<br><br>' +
+        '<p class="brief-caption  col-md-12 col-sm-12 col-xs-12">' + dateTime + '</p>' +
+        '</div>' +
+        '<br><br>' +
+        '<div class="row row-back-color top-border left-border right-border">' +
+        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>' +
+        '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + postStructure + '</pre></div>' +
+        '</div>' +
+        '<div class="row row-back-color top-border left-border right-border">' +
+        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>' +
+        '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + outputStructure + '</pre></div>' +
+        '</div>' +
+        '<div class="row row-back-color top-border left-border right-border bottom-border">' +
+        '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>' +
+        '<div class="col-md-9 col-sm-9 col-xs-9 left-border">' +
+        '<div class="row bottom-border">' +
+        '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">' + exURL + '</p></div></div>' +
+        '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>' +
+        '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">' + exInput + '</pre></div></div>' +
+        '</div>' +
+        '</div>' +
         '</section>'
         ;
 }
 
 function generateDocument(name, dateTime, postStructure, outputStructure, exURL, exInput, key) {
-    return'<!DOCTYPE html>'+
-    '<html lang="en">'+
-        '<head>'+
-        '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />'+
-        '<meta charset="UTF-8">'+
-        '<title>Post Json</title>'+
-    '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>'+
-        '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>'+
-        '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>'+
-        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>'+
-        '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>'+
-    '<style>'+
-    'body, *{'+
-    '    word-wrap: break-word;'+
-    '}'+
+    return '<!DOCTYPE html>' +
+        '<html lang="en">' +
+        '<head>' +
+        '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />' +
+        '<meta charset="UTF-8">' +
+        '<title>Post Json</title>' +
+        '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>' +
+        '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>' +
+        '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>' +
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>' +
+        '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>' +
+        '<style>' +
+        'body, *{' +
+        '    word-wrap: break-word;' +
+        '}' +
 
-       ' @media screen and (max-width: 767px) {'+
-        'body, * {'+
-            'font-size: 12px; !important;'+
-        '}'+
-        'h1{'+
-            'font-size: 24px; !important;'+
-        '}'+
-        'h2{'+
-            'font-size: 16px; !important;'+
-        '}'+
-        'h3{'+
-            'font-size: 12px; !important;'+
-        '}'+
-        'h4{'+
-            'font-size: 8px; !important;'+
-        '}'+
-        'h5{'+
-            'font-size: 4.8px; !important;'+
-        '}'+
-        'h6{'+
-            'font-size: 3.2px; !important;'+
-        '}'+
-    '}'+
+        ' @media screen and (max-width: 767px) {' +
+        'body, * {' +
+        'font-size: 12px; !important;' +
+        '}' +
+        'h1{' +
+        'font-size: 24px; !important;' +
+        '}' +
+        'h2{' +
+        'font-size: 16px; !important;' +
+        '}' +
+        'h3{' +
+        'font-size: 12px; !important;' +
+        '}' +
+        'h4{' +
+        'font-size: 8px; !important;' +
+        '}' +
+        'h5{' +
+        'font-size: 4.8px; !important;' +
+        '}' +
+        'h6{' +
+        'font-size: 3.2px; !important;' +
+        '}' +
+        '}' +
 
-'@media (min-width: 768px) and (max-width: 991px) {'+
-        'body, * {'+
-            'font-size: 16px; !important;'+
-        '}'+
-        'h1{'+
-            'font-size: 28px; !important;'+
-        '}'+
-        'h2{'+
-            'font-size: 20px; !important;'+
-        '}'+
-        'h3{'+
-            'font-size: 16px; !important;'+
-        '}'+
-        'h4{'+
-            'font-size: 12px; !important;'+
-        '}'+
-        'h5{'+
-            'font-size: 8.8px; !important;'+
-        '}'+
-        'h6{'+
-            'font-size: 7.2px; !important;'+
-        '}'+
-    '}'+
+        '@media (min-width: 768px) and (max-width: 991px) {' +
+        'body, * {' +
+        'font-size: 16px; !important;' +
+        '}' +
+        'h1{' +
+        'font-size: 28px; !important;' +
+        '}' +
+        'h2{' +
+        'font-size: 20px; !important;' +
+        '}' +
+        'h3{' +
+        'font-size: 16px; !important;' +
+        '}' +
+        'h4{' +
+        'font-size: 12px; !important;' +
+        '}' +
+        'h5{' +
+        'font-size: 8.8px; !important;' +
+        '}' +
+        'h6{' +
+        'font-size: 7.2px; !important;' +
+        '}' +
+        '}' +
 
-'@media (min-width: 992px) and (max-width: 1199px) {'+
-        'body, * {'+
-            'font-size: 20px; !important;'+
-        '}'+
-        'h1{'+
-            'font-size: 32px; !important;'+
-        '}'+
-        'h2{'+
-            'font-size: 24px; !important;'+
-        '}'+
-        'h3{'+
-            'font-size: 20px; !important;'+
-        '}'+
-        'h4{'+
-            'font-size: 16px; !important;'+
-        '}'+
-        'h5{'+
-            'font-size: 12.8px; !important;'+
-        '}'+
-        'h6{'+
-            'font-size: 11.2px; !important;'+
-        '}'+
-    '}'+
+        '@media (min-width: 992px) and (max-width: 1199px) {' +
+        'body, * {' +
+        'font-size: 20px; !important;' +
+        '}' +
+        'h1{' +
+        'font-size: 32px; !important;' +
+        '}' +
+        'h2{' +
+        'font-size: 24px; !important;' +
+        '}' +
+        'h3{' +
+        'font-size: 20px; !important;' +
+        '}' +
+        'h4{' +
+        'font-size: 16px; !important;' +
+        '}' +
+        'h5{' +
+        'font-size: 12.8px; !important;' +
+        '}' +
+        'h6{' +
+        'font-size: 11.2px; !important;' +
+        '}' +
+        '}' +
 
-'@media screen and (min-width: 1200px) {'+
-        'body, * {'+
-            'font-size: 20px;'+
-            '!important;'+
-        '}'+
+        '@media screen and (min-width: 1200px) {' +
+        'body, * {' +
+        'font-size: 20px;' +
+        '!important;' +
+        '}' +
 
-        'h1 {'+
-            'font-size: 32px;'+
-            '!important;'+
-        '}'+
+        'h1 {' +
+        'font-size: 32px;' +
+        '!important;' +
+        '}' +
 
-        'h2 {'+
-            'font-size: 24px;'+
-            '!important;'+
-        '}'+
+        'h2 {' +
+        'font-size: 24px;' +
+        '!important;' +
+        '}' +
 
-        'h3 {'+
-            'font-size: 20px;'+
-            '!important;'+
-        '}'+
+        'h3 {' +
+        'font-size: 20px;' +
+        '!important;' +
+        '}' +
 
-        'h4 {'+
-            'font-size: 16px;'+
-            '!important;'+
-        '}'+
+        'h4 {' +
+        'font-size: 16px;' +
+        '!important;' +
+        '}' +
 
-        'h5 {'+
-            'font-size: 12.8px;'+
-            '!important;'+
-        '}'+
+        'h5 {' +
+        'font-size: 12.8px;' +
+        '!important;' +
+        '}' +
 
-        'h6 {'+
-            'font-size: 11.2px;'+
-            '!important;'+
-        '}'+
-    '}'+
-'</style>'+
-    '<style>'+
-'.panel-body span{'+
-        'color: #a4c2f4;'+
-    '}'+
-'.panel-body p{'+
-        'font-weight: bold;'+
-        'color : #6699cc;'+
-    '}'+
-'.panel-body p i{'+
-        'color : #9999ff;'+
-    '}'+
-'.header-caption{'+
-        'font-weight: bold;'+
-        'color: #006699;'+
-    '}'+
-'.brief-caption{'+
-        'color: #8d8d8d;'+
-    '}'+
-'.left-border{'+
-        'border-left: solid 5px;'+
-        'border-color: #009999;'+
-    '}'+
-'.right-border{'+
-        'border-right: solid 5px;'+
-        'border-color: #009999;'+
-    '}'+
-'.top-border{'+
-        'border-top: solid 5px;'+
-        'border-color: #009999;'+
-    '}'+
-'.bottom-border{'+
-        'border-bottom: solid 5px;'+
-        'border-color: #009999;'+
-    '}'+
+        'h6 {' +
+        'font-size: 11.2px;' +
+        '!important;' +
+        '}' +
+        '}' +
+        '</style>' +
+        '<style>' +
+        '.panel-body span{' +
+        'color: #a4c2f4;' +
+        '}' +
+        '.panel-body p{' +
+        'font-weight: bold;' +
+        'color : #6699cc;' +
+        '}' +
+        '.panel-body p i{' +
+        'color : #9999ff;' +
+        '}' +
+        '.header-caption{' +
+        'font-weight: bold;' +
+        'color: #006699;' +
+        '}' +
+        '.brief-caption{' +
+        'color: #8d8d8d;' +
+        '}' +
+        '.left-border{' +
+        'border-left: solid 5px;' +
+        'border-color: #009999;' +
+        '}' +
+        '.right-border{' +
+        'border-right: solid 5px;' +
+        'border-color: #009999;' +
+        '}' +
+        '.top-border{' +
+        'border-top: solid 5px;' +
+        'border-color: #009999;' +
+        '}' +
+        '.bottom-border{' +
+        'border-bottom: solid 5px;' +
+        'border-color: #009999;' +
+        '}' +
 
-'.margin-data{'+
-        'margin: 13px;'+
-    '}'+
-'.row-back-color{'+
-        'background-color: #a4c2f4;'+
-    '}'+
-'.definition{'+
-        'background-color: snow;'+
-    '}'+
-    'pre{'+
-        'background-color: ghostwhite;'+
-        'border: 1px solid silver;'+
-        'text-align: left !important;'+
-    '}'+
-'.json-key {'+
-        'color:#e2b91e;'+
-    '}'+
+        '.margin-data{' +
+        'margin: 13px;' +
+        '}' +
+        '.row-back-color{' +
+        'background-color: #a4c2f4;' +
+        '}' +
+        '.definition{' +
+        'background-color: snow;' +
+        '}' +
+        'pre{' +
+        'background-color: ghostwhite;' +
+        'border: 1px solid silver;' +
+        'text-align: left !important;' +
+        '}' +
+        '.json-key {' +
+        'color:#e2b91e;' +
+        '}' +
 
-'.json-value {'+
-        'color: blue;'+
-    '}'+
+        '.json-value {' +
+        'color: blue;' +
+        '}' +
 
-'.json-string {'+
-        'color: #2f6fa8;'+
-    '}'+
-'</style>'+
+        '.json-string {' +
+        'color: #2f6fa8;' +
+        '}' +
+        '</style>' +
 
-    '</head>'+
-    '<body>'+
-    '<header>'+
-    '<div class="panel panel-default text-center">'+
-        '<div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>'+
-    '</div>'+
-    '</header>'+
+        '</head>' +
+        '<body>' +
+        '<header>' +
+        '<div class="panel panel-default text-center">' +
+        '<div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>' +
+        '</div>' +
+        '</header>' +
 
-    '<div class="container">'+
-       getFullApiRow(name, dateTime, postStructure, outputStructure, exURL, exInput, key) +
-        '</div>'+
+        '<div class="container">' +
+        getFullApiRow(name, dateTime, postStructure, outputStructure, exURL, exInput, key) +
+        '</div>' +
 
-        '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>'+
+        '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>' +
 
-        '</body>'+
+        '</body>' +
         '</html>'
         ;
 }
@@ -1746,11 +1769,12 @@ function generateFullDocument(projectPanel) {
                 window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
                 if (!window.indexedDB) {
-                    UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+                    UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
                         console.log('Confirmed.')
                     }, function () {
                         console.log('Rejected.')
-                    });                }
+                    });
+                }
 
                 // created file to store databases
                 var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -1793,43 +1817,43 @@ function generateFullDocument(projectPanel) {
                             }
                             $('#api-output-structure').html(library.json.typePrettyPrint(output));
                             $('#api-ex-url').html(url);
-                            var api = '<section id="'+requestKey+'" class="full_api">'+
-                                '<div class="row api-data">'+
-                                '<div class="col-md-12 col-sm-12 col-xs-12">'+
-                                '<h1>'+$('#api-name').html()+'</h1>'+
-                            '<p>'+$('#api-datetime').html()+'</p>'+
-                            '</div>'+
-                            '</div>'+
-                           '<div class="row row-back-color top-border left-border right-border">'+
-                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>'+
-                            '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">'+$('#api-post-structure').html()+'</pre></div>'+
-                                '</div>'+
-                                '<div class="row row-back-color top-border left-border right-border">'+
-                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>'+
-                            '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">'+$('#api-output-structure').html()+'</pre></div>'+
-                                '</div>'+
-                                '<div class="row row-back-color top-border left-border right-border bottom-border">'+
-                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>'+
-                                '<div class="col-md-9 col-sm-9 col-xs-9 left-border">'+
-                                '<div class="row bottom-border">'+
-                                '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">'+$('#api-ex-url').html()+'</p></div>'+
-                        '</div>'+
-                            '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>'+
-                            '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">'+$('#api-ex-input').html()+'</pre></div></div>'+
-                                '</div>'+
-                                '</div>'+
-                                '</section>'+
-                                '<hr/>'+
-                                '<br>'
+                            var api = '<section id="' + requestKey + '" class="full_api">' +
+                                    '<div class="row api-data">' +
+                                    '<div class="col-md-12 col-sm-12 col-xs-12">' +
+                                    '<h1>' + $('#api-name').html() + '</h1>' +
+                                    '<p>' + $('#api-datetime').html() + '</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="row row-back-color top-border left-border right-border">' +
+                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>' +
+                                    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-post-structure').html() + '</pre></div>' +
+                                    '</div>' +
+                                    '<div class="row row-back-color top-border left-border right-border">' +
+                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>' +
+                                    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-output-structure').html() + '</pre></div>' +
+                                    '</div>' +
+                                    '<div class="row row-back-color top-border left-border right-border bottom-border">' +
+                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>' +
+                                    '<div class="col-md-9 col-sm-9 col-xs-9 left-border">' +
+                                    '<div class="row bottom-border">' +
+                                    '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">' + $('#api-ex-url').html() + '</p></div>' +
+                                    '</div>' +
+                                    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>' +
+                                    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">' + $('#api-ex-input').html() + '</pre></div></div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</section>' +
+                                    '<hr/>' +
+                                    '<br>'
                                 ;
                             allApis += api;
                             apisIndex +=
-                                '<br>'+
-                                '<div class="row text-center">'+
-                                '<div class="col-md-12 col-sm-12 col-xs-12">'+
-                                '<a href="#' + requestKey + '">' + apiName + '</a>'+
-                                '</div>'+
-                                '</div>'+
+                                '<br>' +
+                                '<div class="row text-center">' +
+                                '<div class="col-md-12 col-sm-12 col-xs-12">' +
+                                '<a href="#' + requestKey + '">' + apiName + '</a>' +
+                                '</div>' +
+                                '</div>' +
                                 '<hr>';
                         }
                         else {
@@ -1839,281 +1863,281 @@ function generateFullDocument(projectPanel) {
 
                     objectStore.transaction.oncomplete = function (event) {
                         // Store values in the newly created objectStore.
-                        var fullDocument = '<!DOCTYPE html>'+
-                            '<html lang="en">'+
-                            '<head>'+
-                            '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />'+
-                            '<meta charset="UTF-8">'+
-                            '<title>Post Json</title>'+
-                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>'+
-                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>'+
-                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>'+
-                            '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>'+
-                            '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>'+
-                            '<!-- Main Style -->'+
-                            '<style>'+
-                            'body, *{'+
-                            '    word-wrap: break-word;'+
-                            '}'+
+                        var fullDocument = '<!DOCTYPE html>' +
+                            '<html lang="en">' +
+                            '<head>' +
+                            '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />' +
+                            '<meta charset="UTF-8">' +
+                            '<title>Post Json</title>' +
+                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>' +
+                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>' +
+                            '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>' +
+                            '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>' +
+                            '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>' +
+                            '<!-- Main Style -->' +
+                            '<style>' +
+                            'body, *{' +
+                            '    word-wrap: break-word;' +
+                            '}' +
 
-                            ' @media screen and (max-width: 767px) {'+
-                            'body, * {'+
-                            'font-size: 12px; !important;'+
-                            '}'+
-                            'h1{'+
-                            'font-size: 24px; !important;'+
-                            '}'+
-                            'h2{'+
-                            'font-size: 16px; !important;'+
-                            '}'+
-                            'h3{'+
-                            'font-size: 12px; !important;'+
-                            '}'+
-                            'h4{'+
-                            'font-size: 8px; !important;'+
-                            '}'+
-                            'h5{'+
-                            'font-size: 4.8px; !important;'+
-                            '}'+
-                            'h6{'+
-                            'font-size: 3.2px; !important;'+
-                            '}'+
-                            '}'+
+                            ' @media screen and (max-width: 767px) {' +
+                            'body, * {' +
+                            'font-size: 12px; !important;' +
+                            '}' +
+                            'h1{' +
+                            'font-size: 24px; !important;' +
+                            '}' +
+                            'h2{' +
+                            'font-size: 16px; !important;' +
+                            '}' +
+                            'h3{' +
+                            'font-size: 12px; !important;' +
+                            '}' +
+                            'h4{' +
+                            'font-size: 8px; !important;' +
+                            '}' +
+                            'h5{' +
+                            'font-size: 4.8px; !important;' +
+                            '}' +
+                            'h6{' +
+                            'font-size: 3.2px; !important;' +
+                            '}' +
+                            '}' +
 
-                            '@media (min-width: 768px) and (max-width: 991px) {'+
-                            'body, * {'+
-                            'font-size: 16px; !important;'+
-                            '}'+
-                            'h1{'+
-                            'font-size: 28px; !important;'+
-                            '}'+
-                            'h2{'+
-                            'font-size: 20px; !important;'+
-                            '}'+
-                            'h3{'+
-                            'font-size: 16px; !important;'+
-                            '}'+
-                            'h4{'+
-                            'font-size: 12px; !important;'+
-                            '}'+
-                            'h5{'+
-                            'font-size: 8.8px; !important;'+
-                            '}'+
-                            'h6{'+
-                            'font-size: 7.2px; !important;'+
-                            '}'+
-                            '}'+
+                            '@media (min-width: 768px) and (max-width: 991px) {' +
+                            'body, * {' +
+                            'font-size: 16px; !important;' +
+                            '}' +
+                            'h1{' +
+                            'font-size: 28px; !important;' +
+                            '}' +
+                            'h2{' +
+                            'font-size: 20px; !important;' +
+                            '}' +
+                            'h3{' +
+                            'font-size: 16px; !important;' +
+                            '}' +
+                            'h4{' +
+                            'font-size: 12px; !important;' +
+                            '}' +
+                            'h5{' +
+                            'font-size: 8.8px; !important;' +
+                            '}' +
+                            'h6{' +
+                            'font-size: 7.2px; !important;' +
+                            '}' +
+                            '}' +
 
-                            '@media (min-width: 992px) and (max-width: 1199px) {'+
-                            'body, * {'+
-                            'font-size: 20px; !important;'+
-                            '}'+
-                            'h1{'+
-                            'font-size: 32px; !important;'+
-                            '}'+
-                            'h2{'+
-                            'font-size: 24px; !important;'+
-                            '}'+
-                            'h3{'+
-                            'font-size: 20px; !important;'+
-                            '}'+
-                            'h4{'+
-                            'font-size: 16px; !important;'+
-                            '}'+
-                            'h5{'+
-                            'font-size: 12.8px; !important;'+
-                            '}'+
-                            'h6{'+
-                            'font-size: 11.2px; !important;'+
-                            '}'+
-                            '}'+
+                            '@media (min-width: 992px) and (max-width: 1199px) {' +
+                            'body, * {' +
+                            'font-size: 20px; !important;' +
+                            '}' +
+                            'h1{' +
+                            'font-size: 32px; !important;' +
+                            '}' +
+                            'h2{' +
+                            'font-size: 24px; !important;' +
+                            '}' +
+                            'h3{' +
+                            'font-size: 20px; !important;' +
+                            '}' +
+                            'h4{' +
+                            'font-size: 16px; !important;' +
+                            '}' +
+                            'h5{' +
+                            'font-size: 12.8px; !important;' +
+                            '}' +
+                            'h6{' +
+                            'font-size: 11.2px; !important;' +
+                            '}' +
+                            '}' +
 
-                            '@media screen and (min-width: 1200px) {'+
-                            'body, * {'+
-                            'font-size: 20px;'+
-                            '!important;'+
-                            '}'+
+                            '@media screen and (min-width: 1200px) {' +
+                            'body, * {' +
+                            'font-size: 20px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h1 {'+
-                            'font-size: 32px;'+
-                            '!important;'+
-                            '}'+
+                            'h1 {' +
+                            'font-size: 32px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h2 {'+
-                            'font-size: 24px;'+
-                            '!important;'+
-                            '}'+
+                            'h2 {' +
+                            'font-size: 24px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h3 {'+
-                            'font-size: 20px;'+
-                            '!important;'+
-                            '}'+
+                            'h3 {' +
+                            'font-size: 20px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h4 {'+
-                            'font-size: 16px;'+
-                            '!important;'+
-                            '}'+
+                            'h4 {' +
+                            'font-size: 16px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h5 {'+
-                            'font-size: 12.8px;'+
-                            '!important;'+
-                            '}'+
+                            'h5 {' +
+                            'font-size: 12.8px;' +
+                            '!important;' +
+                            '}' +
 
-                            'h6 {'+
-                            'font-size: 11.2px;'+
-                            '!important;'+
-                            '}'+
-                            '}'+
-                            '</style>'+
-                            '<style>'+
-                                        '#sidebar{'+
-                            'background-color: snow;'+
-                            'position: fixed;'+
-                            'height: 100%;'+
-                            'overflow-y: auto;'+
-                            'z-index: 99;'+
-                        '}'+
-        '#sidebar::-webkit-scrollbar-track'+
-                        '{'+
-                            '-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);'+
-                            'border-radius: 10px;'+
-                            'background-color: #a4c2f4;'+
-                        '}'+
+                            'h6 {' +
+                            'font-size: 11.2px;' +
+                            '!important;' +
+                            '}' +
+                            '}' +
+                            '</style>' +
+                            '<style>' +
+                            '#sidebar{' +
+                            'background-color: snow;' +
+                            'position: fixed;' +
+                            'height: 100%;' +
+                            'overflow-y: auto;' +
+                            'z-index: 99;' +
+                            '}' +
+                            '#sidebar::-webkit-scrollbar-track' +
+                            '{' +
+                            '-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);' +
+                            'border-radius: 10px;' +
+                            'background-color: #a4c2f4;' +
+                            '}' +
 
-        '#sidebar::-webkit-scrollbar'+
-                        '{'+
-                            'width: 12px;'+
-                            'background-color: #a4c2f4;'+
-                        '}'+
+                            '#sidebar::-webkit-scrollbar' +
+                            '{' +
+                            'width: 12px;' +
+                            'background-color: #a4c2f4;' +
+                            '}' +
 
-        '#sidebar::-webkit-scrollbar-thumb'+
-                        '{'+
-                            'border-radius: 10px;'+
-                            '-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);'+
-                            'background-color: #2f6fa8;'+
-                        '}'+
-                        'a{'+
-                            'text-decoration: none;'+
-                            'color: #006699;'+
-                            'font-weight: bold;'+
-                        '}'+
-                        'a:hover{'+
-                            'text-decoration: none;'+
-                            'color: grey;'+
-                        '}'+
-                        'hr{'+
-                            'height: 1px;'+
-                            'color: #9999ff;'+
-                            'background-color: #9999ff;'+
-                        '}'+
-                        '.api-data h1{'+
-                            'font-weight: bold;'+
-                            'color: #006699;'+
-                        '}'+
-                        '.api-data p{'+
-                            'color: #8d8d8d;'+
-                        '}'+
-                            '.panel-body span{'+
-                            'color: #a4c2f4;'+
-                            '}'+
-                            '.panel-body p{'+
-                            'font-weight: bold;'+
-                            'color : #6699cc;'+
-                            '}'+
-                            '.panel-body p i{'+
-                            'color : #9999ff;'+
-                            '}'+
-                            '.header-caption{'+
-                            'font-weight: bold;'+
-                            'color: #006699;'+
-                            '}'+
-                            '.brief-caption{'+
-                            'color: #8d8d8d;'+
-                            '}'+
-                            '.left-border{'+
-                            'border-left: solid 5px;'+
-                            'border-color: #009999;'+
-                            '}'+
-                            '.right-border{'+
-                            'border-right: solid 5px;'+
-                            'border-color: #009999;'+
-                            '}'+
-                            '.top-border{'+
-                            'border-top: solid 5px;'+
-                            'border-color: #009999;'+
-                            '}'+
-                            '.bottom-border{'+
-                            'border-bottom: solid 5px;'+
-                            'border-color: #009999;'+
-                            '}'+
+                            '#sidebar::-webkit-scrollbar-thumb' +
+                            '{' +
+                            'border-radius: 10px;' +
+                            '-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);' +
+                            'background-color: #2f6fa8;' +
+                            '}' +
+                            'a{' +
+                            'text-decoration: none;' +
+                            'color: #006699;' +
+                            'font-weight: bold;' +
+                            '}' +
+                            'a:hover{' +
+                            'text-decoration: none;' +
+                            'color: grey;' +
+                            '}' +
+                            'hr{' +
+                            'height: 1px;' +
+                            'color: #9999ff;' +
+                            'background-color: #9999ff;' +
+                            '}' +
+                            '.api-data h1{' +
+                            'font-weight: bold;' +
+                            'color: #006699;' +
+                            '}' +
+                            '.api-data p{' +
+                            'color: #8d8d8d;' +
+                            '}' +
+                            '.panel-body span{' +
+                            'color: #a4c2f4;' +
+                            '}' +
+                            '.panel-body p{' +
+                            'font-weight: bold;' +
+                            'color : #6699cc;' +
+                            '}' +
+                            '.panel-body p i{' +
+                            'color : #9999ff;' +
+                            '}' +
+                            '.header-caption{' +
+                            'font-weight: bold;' +
+                            'color: #006699;' +
+                            '}' +
+                            '.brief-caption{' +
+                            'color: #8d8d8d;' +
+                            '}' +
+                            '.left-border{' +
+                            'border-left: solid 5px;' +
+                            'border-color: #009999;' +
+                            '}' +
+                            '.right-border{' +
+                            'border-right: solid 5px;' +
+                            'border-color: #009999;' +
+                            '}' +
+                            '.top-border{' +
+                            'border-top: solid 5px;' +
+                            'border-color: #009999;' +
+                            '}' +
+                            '.bottom-border{' +
+                            'border-bottom: solid 5px;' +
+                            'border-color: #009999;' +
+                            '}' +
 
-                            '.margin-data{'+
-                            'margin: 13px;'+
-                            '}'+
-                            '.row-back-color{'+
-                            'background-color: #a4c2f4;'+
-                            '}'+
-                            '.definition{'+
-                            'background-color: snow;'+
-                            '}'+
-                            'pre{'+
-                            'background-color: ghostwhite;'+
-                            'border: 1px solid silver;'+
-                            'text-align: left !important;'+
-                            '}'+
-                            '.json-key {'+
-                            'color:#e2b91e;'+
-                            '}'+
+                            '.margin-data{' +
+                            'margin: 13px;' +
+                            '}' +
+                            '.row-back-color{' +
+                            'background-color: #a4c2f4;' +
+                            '}' +
+                            '.definition{' +
+                            'background-color: snow;' +
+                            '}' +
+                            'pre{' +
+                            'background-color: ghostwhite;' +
+                            'border: 1px solid silver;' +
+                            'text-align: left !important;' +
+                            '}' +
+                            '.json-key {' +
+                            'color:#e2b91e;' +
+                            '}' +
 
-                            '.json-value {'+
-                            'color: blue;'+
-                            '}'+
+                            '.json-value {' +
+                            'color: blue;' +
+                            '}' +
 
-                            '.json-string {'+
-                            'color: #2f6fa8;'+
-                            '}'+
-                            '</style>'+
+                            '.json-string {' +
+                            'color: #2f6fa8;' +
+                            '}' +
+                            '</style>' +
 
-                            '</head>'+
-                            '<body>'+
-                            '<header class="text-center navbar-fixed-top" style="z-index: 99">'+
-                            '<div class="panel panel-default text-center" style="margin-bottom: 0">'+
-                            '<div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>'+
-                            '</div>'+
-                            '</header>'+
-                            '<div id="main-body" class="container-fluid">'+
-                            '<div id="main-row" class="row">'+
-                            '<div id="sidebar" class="col-md-3 col-sm-3 col-xs-3">'+
-                             apisIndex+
-                            '</div>'+
-                            '<div class="col-md-7 col-sm-7 col-xs-7 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">'+
-                            '<div class="row text-center">'+
-                            '<h1 class="header-caption col-md-12 col-sm-12 col-xs-12">'+projectName+'</h1>'+
-                        '</div>'+
-                        '<br><br>';
+                            '</head>' +
+                            '<body>' +
+                            '<header class="text-center navbar-fixed-top" style="z-index: 99">' +
+                            '<div class="panel panel-default text-center" style="margin-bottom: 0">' +
+                            '<div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>' +
+                            '</div>' +
+                            '</header>' +
+                            '<div id="main-body" class="container-fluid">' +
+                            '<div id="main-row" class="row">' +
+                            '<div id="sidebar" class="col-md-3 col-sm-3 col-xs-3">' +
+                            apisIndex +
+                            '</div>' +
+                            '<div class="col-md-7 col-sm-7 col-xs-7 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">' +
+                            '<div class="row text-center">' +
+                            '<h1 class="header-caption col-md-12 col-sm-12 col-xs-12">' + projectName + '</h1>' +
+                            '</div>' +
+                            '<br><br>';
 
                         fullDocument += allApis;
 
-                        fullDocument += '</div>'+
-                        '</div>'+
-                        '</div>'+
-                        '<script>'+
-                        '$(document).ready(function () {'+
-                            '$("a").on("click", function(event) {'+
-                                'if (this.hash !== "") {'+
-                                    'event.preventDefault();'+
-                                    'var hash = this.hash;'+
-                                    '$("html, body").animate({'+
-                                        'scrollTop: $(hash).offset().top'+
-                                    '}, 800, function(){'+
-                                        'window.location.hash = hash;'+
-                                    '});'+
-                                 '}'+
-                            '});'+
-                        '});'+
-                        '</script>'+
-                        '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>'+
-                            '</body>'+
+                        fullDocument += '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<script>' +
+                            '$(document).ready(function () {' +
+                            '$("a").on("click", function(event) {' +
+                            'if (this.hash !== "") {' +
+                            'event.preventDefault();' +
+                            'var hash = this.hash;' +
+                            '$("html, body").animate({' +
+                            'scrollTop: $(hash).offset().top' +
+                            '}, 800, function(){' +
+                            'window.location.hash = hash;' +
+                            '});' +
+                            '}' +
+                            '});' +
+                            '});' +
+                            '</script>' +
+                            '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>' +
+                            '</body>' +
                             '</html>';
                         if (i + 1 == trLength)
                             saveFile(fullDocument, projectName, "text/html", "html");
@@ -2148,11 +2172,12 @@ function exportProject(projectPanel, requestsCount) {
                 window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 
                 if (!window.indexedDB) {
-                    UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function() {
+                    UIkit.modal.alert("Your browser doesn't support a stable version of IndexedDB.").then(function () {
                         console.log('Confirmed.')
                     }, function () {
                         console.log('Rejected.')
-                    });                }
+                    });
+                }
 
                 // created file to store databases
                 var request = window.indexedDB.open(dbFileName, dbFileVersion);
@@ -2467,7 +2492,7 @@ function preventEvent(e) {
 }
 
 function preventIframeEvents() {
-    $('#preview-row').find('*').on('click', preventEvent).on('keypress',preventEvent).on('keydown', preventEvent).on('keyup', preventEvent);
+    $('#preview-row').find('*').on('click', preventEvent).on('keypress', preventEvent).on('keydown', preventEvent).on('keyup', preventEvent);
 }
 
 //--------------------------------------------- excute functions
@@ -2507,7 +2532,7 @@ $(document).ready(function () {
             projectname: projectName
         };
         if (projectName == "" || projectName == "Choose a Project") {
-            UIkit.modal.alert("Please Select a Project.").then(function() {
+            UIkit.modal.alert("Please Select a Project.").then(function () {
                 console.log('Confirmed.')
             }, function () {
                 console.log('Rejected.')
@@ -2515,7 +2540,7 @@ $(document).ready(function () {
             return false;
         }
         if (name == "") {
-            UIkit.modal.alert("Please Enter Request Name").then(function() {
+            UIkit.modal.alert("Please Enter Request Name").then(function () {
                 console.log('Confirmed.')
             }, function () {
                 console.log('Rejected.')
@@ -2548,7 +2573,7 @@ $(document).ready(function () {
             projectname: projectName
         };
         if (projectName == "") {
-            UIkit.modal.alert("Please Select a Project.").then(function() {
+            UIkit.modal.alert("Please Select a Project.").then(function () {
                 console.log('Confirmed.')
             }, function () {
                 console.log('Rejected.')
@@ -2556,7 +2581,7 @@ $(document).ready(function () {
             return false;
         }
         if (name == "") {
-            UIkit.modal.alert("Please Enter Request Name").then(function() {
+            UIkit.modal.alert("Please Enter Request Name").then(function () {
                 console.log('Confirmed.')
             }, function () {
                 console.log('Rejected.')
@@ -2603,8 +2628,8 @@ $(document).ready(function () {
 
     $('#file-import').on('change', function () {
         if (this.files[0]) {
-            var file    = this.files[0];
-            var reader  = new FileReader();
+            var file = this.files[0];
+            var reader = new FileReader();
             var isValid = 0;
             reader.onload = function () {
                 var projectDataText = reader.result;
@@ -2616,9 +2641,8 @@ $(document).ready(function () {
             };
             reader.onloadend = function () {
                 $('#accordion').html("");
-                if(isValid == 0)
-                {
-                    UIkit.modal.alert("Import Failed Wrong File Content Format!.").then(function() {
+                if (isValid == 0) {
+                    UIkit.modal.alert("Import Failed Wrong File Content Format!.").then(function () {
                         console.log('Confirmed.')
                     }, function () {
                         console.log('Rejected.')
@@ -2627,11 +2651,11 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $('div.cs-select').remove();
                     $('#projects-selector').append(
-                        '<section>'+
-                        '<select id="project-selector" class="cs-select cs-skin-underline">'+
-                        '<option value="" disabled selected>Choose a Project</option>'+
-                        '</select>'+
-                    '</section>');
+                        '<section>' +
+                        '<select id="project-selector" class="cs-select cs-skin-underline">' +
+                        '<option value="" disabled selected>Choose a Project</option>' +
+                        '</select>' +
+                        '</section>');
                     retrieveProjectAllRequest();
                 }, 1000);
 
