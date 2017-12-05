@@ -2,6 +2,10 @@ textarea {
     resize: none;
 }
 
+textarea, input[type="text"]{
+    font-weight: normal !important;
+}
+
 #offcanvas-bar {
     background-color: snow;
     position: fixed;
