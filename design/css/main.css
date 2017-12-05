@@ -32,6 +32,7 @@ header .panel-body p i {
     font-size: 30px;
 }
 
+
 .popup {
     width: 100%;
     height: 100%;
@@ -45,7 +46,8 @@ header .panel-body p i {
 
 /* Inner */
 .popup-inner {
-    max-width: 700px;
+    max-width: 900px;
+    max-height: 600px;
     width: 90%;
     padding: 40px;
     position: absolute;
@@ -118,7 +120,7 @@ a span[class="fa fa-close"] {
 }
 
 #api_display {
-    max-height: 600px;
+    max-height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
 }
