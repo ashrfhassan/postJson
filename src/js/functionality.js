@@ -32,7 +32,29 @@ String.prototype.isNumberDouble = function () {
         return false;
     }
     return true;
-};
+}
+
+function fetechFirstCell(arr) {
+    if (arr.constructor.name == "Array") {
+        var length = arr.length;
+        for (var x = 1; x < length; x++) {
+            arr.pop();
+        }
+    } else {
+        $.each(arr, function (key, value) {
+            if (value != null && value != "null") {
+                if (value.constructor.name == "Array") {
+                    var length = value.length;
+                    for (var x = 1; x < length; x++) {
+                        value.pop();
+                    }
+                    if (value[0].constructor.name == "Object")
+                        fetechFirstCell(value[0]);
+                }
+            }
+        });
+    }
+}
 
 if (!library)
     var library = {};
@@ -57,7 +79,7 @@ library.json = {
             .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
             .replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(jsonLine, library.json.replacer);
-        if (obj.length >= 0 && typeof obj == "object") {
+        if (obj.constructor.name == "Array") {
             arrLength.push(obj.length);
             indexOfBracket = objStringfy.indexOf('[', indexOfBracket);
             indexsOfBrackets.push(indexOfBracket);
@@ -65,7 +87,7 @@ library.json = {
         } else {
             $.each(obj, function (key, value) {
                 if (value != null && value != "null") {
-                    if (value.length >= 0 && typeof value == "object") {
+                    if (value.constructor.name == "Array") {
                         arrLength.push(value.length);
                         indexOfBracket = objStringfy.indexOf('[', indexOfBracket);
                         indexsOfBrackets.push(indexOfBracket);
@@ -110,23 +132,7 @@ library.json = {
         return r + (pEnd || '');
     },
     typePrettyPrint: function (obj) {
-        if (obj.length >= 0 && typeof obj == "object") {
-            var length = obj.length;
-            for (var x = 1; x < length; x++) {
-                obj.pop();
-            }
-        } else {
-            $.each(obj, function (key, value) {
-                if (value != null && value != "null") {
-                    if (value.length >= 0 && typeof value == "object") {
-                        var length = value.length;
-                        for (var x = 1; x < length; x++) {
-                            value.pop();
-                        }
-                    }
-                }
-            });
-        }
+        fetechFirstCell(obj);
         var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
         var objStringfy = JSON.stringify(obj, null, 3)
             .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
@@ -1818,34 +1824,34 @@ function generateFullDocument(projectPanel) {
                             $('#api-output-structure').html(library.json.typePrettyPrint(output));
                             $('#api-ex-url').html(url);
                             var api = '<section id="' + requestKey + '" class="full_api">' +
-                                    '<div class="row api-data">' +
-                                    '<div class="col-md-12 col-sm-12 col-xs-12">' +
-                                    '<h1>' + $('#api-name').html() + '</h1>' +
-                                    '<p>' + $('#api-datetime').html() + '</p>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="row row-back-color top-border left-border right-border">' +
-                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>' +
-                                    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-post-structure').html() + '</pre></div>' +
-                                    '</div>' +
-                                    '<div class="row row-back-color top-border left-border right-border">' +
-                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>' +
-                                    '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-output-structure').html() + '</pre></div>' +
-                                    '</div>' +
-                                    '<div class="row row-back-color top-border left-border right-border bottom-border">' +
-                                    '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>' +
-                                    '<div class="col-md-9 col-sm-9 col-xs-9 left-border">' +
-                                    '<div class="row bottom-border">' +
-                                    '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">' + $('#api-ex-url').html() + '</p></div>' +
-                                    '</div>' +
-                                    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>' +
-                                    '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">' + $('#api-ex-input').html() + '</pre></div></div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</section>' +
-                                    '<hr/>' +
-                                    '<br>'
-                                ;
+                                '<div class="row api-data">' +
+                                '<div class="col-md-12 col-sm-12 col-xs-12">' +
+                                '<h1>' + $('#api-name').html() + '</h1>' +
+                                '<p>' + $('#api-datetime').html() + '</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row row-back-color top-border left-border right-border">' +
+                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">POST Parameters</p></div>' +
+                                '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-post-structure').html() + '</pre></div>' +
+                                '</div>' +
+                                '<div class="row row-back-color top-border left-border right-border">' +
+                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Output Structure</p></div>' +
+                                '<div class="definition col-md-9 col-sm-9 col-xs-9 left-border"><pre class="margin-data">' + $('#api-output-structure').html() + '</pre></div>' +
+                                '</div>' +
+                                '<div class="row row-back-color top-border left-border right-border bottom-border">' +
+                                '<div class="col-md-3 col-sm-3 col-xs-3"><p class="margin-data">Example</p></div>' +
+                                '<div class="col-md-9 col-sm-9 col-xs-9 left-border">' +
+                                '<div class="row bottom-border">' +
+                                '<div class="definition col-md-12 col-sm-12 col-xs-12"><p class="margin-data">' + $('#api-ex-url').html() + '</p></div>' +
+                                '</div>' +
+                                '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12"><p>Input :</p></div></div>' +
+                                '<div class="row"><div class="definition col-md-12 col-sm-12 col-xs-12 text-break"><pre class="margin-data">' + $('#api-ex-input').html() + '</pre></div></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</section>' +
+                                '<hr/>' +
+                                '<br>'
+                            ;
                             allApis += api;
                             apisIndex +=
                                 '<br>' +
