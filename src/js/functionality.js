@@ -45,11 +45,15 @@ function fetechFirstCell(arr) {
             if (value != null && value != "null") {
                 if (value.constructor.name == "Array") {
                     var length = value.length;
-                    for (var x = 1; x < length; x++) {
-                        value.pop();
+                    if(length > 1) {
+                        for (var x = 1; x < length; x++) {
+                            value.pop();
+                        }
                     }
-                    if (value[0].constructor.name == "Object")
-                        fetechFirstCell(value[0]);
+                    if(length > 0) {
+                        if (value[0].constructor.name == "Object")
+                            fetechFirstCell(value[0]);
+                    }
                 }
             }
         });
