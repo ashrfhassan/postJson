@@ -2107,7 +2107,7 @@ function generateFullDocument(projectPanel) {
                             '</head>' +
                             '<body>' +
                             '<header class="text-center navbar-fixed-top" style="z-index: 99">' +
-                            '<div class="panel panel-default text-center" style="margin-bottom: 0">' +
+                            '<div id="logo-panel" class="panel panel-default text-center" style="margin-bottom: 0">' +
                             '<div class="panel-body"><p> <span> {{ </span> Post <i>Json</i> <span>}} </span> </p></div>' +
                             '</div>' +
                             '</header>' +
@@ -2138,6 +2138,16 @@ function generateFullDocument(projectPanel) {
                             '}, 800, function(){' +
                             'window.location.hash = hash;' +
                             '});' +
+                            '}' +
+                            '});' +
+                            '$( window ).scroll(function() {' +
+                            'if ($(this).scrollTop()>100)' +
+                            '{' +
+                            '$("#logo-panel").fadeOut();' +
+                            '}' +
+                            'else' +
+                            '{' +
+                            '$("#logo-panel").fadeIn();' +
                             '}' +
                             '});' +
                             '});' +
