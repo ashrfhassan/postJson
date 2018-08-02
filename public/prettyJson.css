@@ -1,0 +1,14 @@
+.raw-input {
+    background-color: ghostwhite;
+    border: 1px solid silver;
+    padding: 5px 10px;
+    }
+ .json-key {
+    color: brown;
+    }
+ .json-value {
+    color: navy;
+    }
+ .json-string {
+    color: rgb(66, 66, 4);
+    }

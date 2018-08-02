@@ -1,0 +1,93 @@
+html, body{
+  height: 100%;
+}
+#main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  main {
+    flex: 1 0 auto;
+  }
+  .full-height{
+    min-height:100%;
+    height: 100%;
+  }
+  .full-height-98{
+    min-height:98%;
+    height: 98%;
+  }
+  .margin-0{
+margin: 0 !important;
+  }
+  .padding-0{
+padding: 0 !important;
+  }
+  .active-tab{
+    border-bottom-color: rgba(238,110,115,0.7);
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+  }
+  .white-btn{
+    color: white !important;
+  }
+  .pink-color{
+    color: #ee6e73;
+  }
+  .emerald-btn{
+    color: #26a69a !important;
+  }
+  .scroll-headers{
+    max-height: 440px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .scroll-sideBar{
+    max-height: 570px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .simple-link{
+    @extend .emerald-btn;
+    cursor: pointer;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+  .floating-eye-btn{
+    position: absolute;
+    z-index: 1;
+    right: 15px;
+  }
+  .pretty-btn{
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 23px;
+  }
+  .pull-right{
+    float: right;
+  }
+  .emerald-link-hover{
+    color: black;
+    @extend .pointer;
+    &:hover{
+      @extend .emerald-btn;
+    }
+  }
+  .margin-project{
+    margin-left: 20px;
+  }
+  .raw-input{
+    min-height: 400px;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .form-data-scroll{
+    min-height: 400px;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
