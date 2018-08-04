@@ -20,15 +20,6 @@ This tool is amazing you can easily
 6-Enjoy "Generate Documentation" :))
 
    -------------------------------------------------------------------------------------
-### Installation Guide
-
-after cloning this repo
-
-Run **npm install**
-
-Note: in case you are using Linux or MacOS
-you may face trouble with **node-sass** , if so just make sure to have your node_modules directory with Read/Write premission with all sub-directories then re-run **npm install**
-
 ##### Adding to google chrome locally
 
 1- open chrome Extensions.
@@ -43,7 +34,17 @@ you may face trouble with **node-sass** , if so just make sure to have your node
 
 
    -------------------------------------------------------------------------------------
-### Frameworks used to build this tool
+### Installation Guide (for development)
+
+after cloning this repo
+
+Run **npm install**
+
+Note: in case you are using Linux or MacOS
+you may face trouble with **node-sass** , if so just make sure to have your node_modules directory with Read/Write premission with all sub-directories then re-run **npm install**
+
+to start development with watcher just open a terminal onproject directory and run **npm start**
+#### Frameworks used to build this tool
 
 1- VueJs v2.X
 
