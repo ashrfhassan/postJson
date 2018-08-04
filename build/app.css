@@ -85,3 +85,10 @@ main {
   overflow-x: hidden;
   overflow-y: auto; }
 
+.logo {
+  width: 50px;
+  height: 50px;
+  border-color: white;
+  border-style: solid;
+  border-width: 2px; }
+

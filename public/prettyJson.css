@@ -2,13 +2,16 @@
     background-color: ghostwhite;
     border: 1px solid silver;
     padding: 5px 10px;
-    }
- .json-key {
+}
+
+.json-key {
     color: brown;
-    }
- .json-value {
+}
+
+.json-value {
     color: navy;
-    }
- .json-string {
+}
+
+.json-string {
     color: rgb(66, 66, 4);
-    }
+}
