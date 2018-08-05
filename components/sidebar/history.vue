@@ -9,76 +9,50 @@
         </table>
         <table class="highlight">
             <tbody>
-            <tr class="h-row">
-                <td><p class="emerald-btn"><strong>Post</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="emerald-btn"><strong>Post</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="emerald-btn"><strong>Post</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="emerald-btn"><strong>Post</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="emerald-btn"><strong>Post</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...<a class="floating-eye-btn btn-floating d-none"><i
-                        class="fa fa-eye"></i></a></p></td>
-            </tr>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-post-request></app-post-request>
+    <app-post-request></app-post-request>
+     <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+   <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
+  <app-get-request></app-get-request>
             </tbody>
         </table>
     </div>
 </template>
 
 <script>
-    export default {
-        data: function () {
-            return {};
-        },
-        mounted() {
-            // on hover history row
-            $('.h-row').on('mouseover', function () {
-                $(this).find('a').removeClass('d-none');
-            });
-            // on out history row
-            $('.h-row').on('mouseout', function () {
-                $(this).find('a').addClass('d-none');
-            });
-        },
-        methods: {}
-    };
+import GetRequest from "./sideGetRequest.vue";
+import PostRequest from "./sidePostRequest.vue";
+
+export default {
+  data: function() {
+    return {};
+  },
+  mounted() {
+    // on hover history row
+    $(".h-row").on("mouseover", function() {
+      $(this)
+        .find("a")
+        .removeClass("d-none");
+    });
+    // on out history row
+    $(".h-row").on("mouseout", function() {
+      $(this)
+        .find("a")
+        .addClass("d-none");
+    });
+  },
+  methods: {},
+  components: {
+    "app-get-request": GetRequest,
+    "app-post-request": PostRequest
+  }
+};
 </script>

@@ -20,35 +20,34 @@
 </template>
 
 <script>
-    import HistoryTab from './../sidebar/history.vue'
-    import CollectionTab from './../sidebar/collection.vue'
+import HistoryTab from "./../sidebar/history.vue";
+import CollectionTab from "./../sidebar/collection.vue";
 
-    export default {
-        data: function () {
-            return {
-                tabs: {
-                    isActiveHistory: true,
-                    isActiveCollection: false
-                }
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            toggleTabs: function (el) {
-                let elementID = el.target.id;
-                if (elementID == "history-tab") {
-                    this.$set(this.tabs, "isActiveHistory", true);
-                    this.$set(this.tabs, "isActiveCollection", false);
-                } else {
-                    this.$set(this.tabs, "isActiveHistory", false);
-                    this.$set(this.tabs, "isActiveCollection", true);
-                }
-            }
-        },
-        components: {
-            'app-history': HistoryTab,
-            'app-collection': CollectionTab,
-        }
+export default {
+  data: function() {
+    return {
+      tabs: {
+        isActiveHistory: true,
+        isActiveCollection: false
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    toggleTabs: function(el) {
+      let elementID = el.target.id;
+      if (elementID == "history-tab") {
+        this.$set(this.tabs, "isActiveHistory", true);
+        this.$set(this.tabs, "isActiveCollection", false);
+      } else {
+        this.$set(this.tabs, "isActiveHistory", false);
+        this.$set(this.tabs, "isActiveCollection", true);
+      }
+    }
+  },
+  components: {
+    "app-history": HistoryTab,
+    "app-collection": CollectionTab
+  }
+};
 </script>

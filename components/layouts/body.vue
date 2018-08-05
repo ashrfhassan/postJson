@@ -12,17 +12,20 @@
 
             </div>
         </div>
+                <app-request-details></app-request-details>
     </main>
 </template>
 <script>
-    import SideBar from "./sidebar.vue";
-    import Main from "./main.vue";
+import SideBar from "./sidebar.vue";
+import Main from "./main.vue";
+import RequestDetails from "./../sidebar/details/requestDetails.vue";
 
-    export default {
-        components: {
-            "app-sidebar": SideBar,
-            "app-main": Main
-        }
-    };
+export default {
+  components: {
+    "app-sidebar": SideBar,
+    "app-main": Main,
+    "app-request-details": RequestDetails
+  }
+};
 </script>
 
