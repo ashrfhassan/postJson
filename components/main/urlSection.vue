@@ -1,15 +1,17 @@
 <template>
     <div class="container-fuild margin-0 padding-0">
         <div class="row">
-            <div class="col-sm-2 col-md-2 text-center">
-                <a id="btn-request-type" class='dropdown-trigger btn white-btn' data-target='method-type'>Get</a>
-
-                <ul id='method-type' class='dropdown-content'>
-                    <li><a class="emerald-btn active-method" @click="changRequestType">Get</a></li>
-                    <li><a class="emerald-btn" @click="changRequestType">Post</a></li>
-                </ul>
+            <div class="col-sm-3 col-md-3 text-center">
+  <div class="switch">
+    <label>
+      GET
+      <input id="btn-request-type" @click="changRequestType" type="checkbox">
+      <span class="lever"></span>
+      POST
+    </label>
+  </div>
             </div>
-            <div class="col-sm-7 col-md-7 input-field text-center">
+            <div class="col-sm-6 col-md-6 input-field text-center">
                 <input id="url" type="text">
                 <label for="url">URL</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Enter URL</span>
@@ -27,17 +29,23 @@
     export default {
         data: function () {
             return {
-                methodsTypes: {}
+                methodsTypes: {
+                    checked:false
+                }
             };
         },
         mounted() {
-            $(".dropdown-trigger").dropdown();
+            
         },
         methods: {
             changRequestType: function (event) {
                 let el = event.target;
-                $("#btn-request-type").text($(el).text());
-                this.$emit("changRequestType", $(el).text());
+                let type = "Get";
+                this.methodsTypes.checked = !this.methodsTypes.checked;
+                if(this.methodsTypes.checked){
+                 type = "Post";
+                }
+                this.$emit("changRequestType", type);
             }
         }
     };

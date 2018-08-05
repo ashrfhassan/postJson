@@ -32,49 +32,50 @@
 </template>
 
 <script>
-    import URLSection from "./../main/urlSection.vue";
-    import Headers from "./../main/headers/requestHeaders.vue";
-    import Body from "./../main/body/requestBody.vue";
+import URLSection from "./../main/urlSection.vue";
+import Headers from "./../main/headers/requestHeaders.vue";
+import Body from "./../main/body/requestBody.vue";
 
-    export default {
-        data: function () {
-            return {
-                swaper: {
-                    isActiveHeaders: true,
-                    isActiveBody: false,
-                    currentView: "Headers",
-                    isFullROW: true,
-                }
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            toggleHeaderBody: function (el) {
-                let elementID = el.target.id;
-                if (elementID == "headers-tab") {
-                    this.$set(this.swaper, "isActiveHeaders", true);
-                    this.$set(this.swaper, "isActiveBody", false);
-                    this.$set(this.swaper, "currentView", "Headers");
-                } else {
-                    this.$set(this.swaper, "isActiveHeaders", false);
-                    this.$set(this.swaper, "isActiveBody", true);
-                    this.$set(this.swaper, "currentView", "Body");
-                }
-            },
-            changRequestType: function (name) {
-                if (name == 'Get') {
-                    $('#headers-tab').click();
-                    this.$set(this.swaper, "isFullROW", true);
-                } else {
-                    this.$set(this.swaper, "isFullROW", false);
-                }
-            }
-        },
-        components: {
-            "app-urlsection": URLSection,
-            Headers: Headers,
-            Body: Body
-        }
+export default {
+  data: function() {
+    return {
+      swaper: {
+        isActiveHeaders: true,
+        isActiveBody: false,
+        currentView: "Headers",
+        isFullROW: true
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    toggleHeaderBody: function(el) {
+      let elementID = el.target.id;
+      if (elementID == "headers-tab") {
+        this.$set(this.swaper, "isActiveHeaders", true);
+        this.$set(this.swaper, "isActiveBody", false);
+        this.$set(this.swaper, "currentView", "Headers");
+      } else {
+        this.$set(this.swaper, "isActiveHeaders", false);
+        this.$set(this.swaper, "isActiveBody", true);
+        this.$set(this.swaper, "currentView", "Body");
+      }
+    },
+    changRequestType: function(type) {
+      if (type == "Get") {
+        this.$set(this.swaper, "isActiveHeaders", true);
+        this.$set(this.swaper, "isActiveBody", false);
+        this.$set(this.swaper, "currentView", "Headers");
+        this.$set(this.swaper, "isFullROW", true);
+      } else {
+        this.$set(this.swaper, "isFullROW", false);
+      }
+    }
+  },
+  components: {
+    "app-urlsection": URLSection,
+    Headers: Headers,
+    Body: Body
+  }
+};
 </script>
