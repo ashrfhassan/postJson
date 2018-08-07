@@ -13,18 +13,21 @@
             </div>
         </div>
                 <app-request-details></app-request-details>
+                                <app-project-details></app-project-details>
     </main>
 </template>
 <script>
 import SideBar from "./sidebar.vue";
 import Main from "./main.vue";
 import RequestDetails from "./../sidebar/details/requestDetails.vue";
+import ProjectDetails from "./../sidebar/details/projectDetails.vue";
 
 export default {
   components: {
     "app-sidebar": SideBar,
     "app-main": Main,
-    "app-request-details": RequestDetails
+    "app-request-details": RequestDetails,
+    "app-project-details": ProjectDetails
   }
 };
 </script>
