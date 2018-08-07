@@ -14,6 +14,7 @@
         </div>
                 <app-request-details></app-request-details>
                                 <app-project-details></app-project-details>
+                                <app-save-request></app-save-request>
     </main>
 </template>
 <script>
@@ -21,13 +22,15 @@ import SideBar from "./sidebar.vue";
 import Main from "./main.vue";
 import RequestDetails from "./../sidebar/details/requestDetails.vue";
 import ProjectDetails from "./../sidebar/details/projectDetails.vue";
+import SaveRequest from "./../main/saveRequest.vue";
 
 export default {
   components: {
     "app-sidebar": SideBar,
     "app-main": Main,
     "app-request-details": RequestDetails,
-    "app-project-details": ProjectDetails
+    "app-project-details": ProjectDetails,
+    "app-save-request": SaveRequest
   }
 };
 </script>

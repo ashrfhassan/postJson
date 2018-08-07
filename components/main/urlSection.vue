@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-3 col-md-3 text-center">
                 <a class='waves-effect waves-light white-btn btn'>Send</a>
-                <a class='waves-effect waves-light white-btn btn'>Save</a>
+                <a @click="showSaveRequest" class='waves-effect waves-light white-btn btn'>Save</a>
             </div>
         </div>
         <div class="divider"></div>
@@ -46,6 +46,9 @@
                  type = "Post";
                 }
                 this.$emit("changRequestType", type);
+            },
+            showSaveRequest: function (){
+                $('#save-request').modal('show');
             }
         }
     };
