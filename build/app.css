@@ -98,3 +98,7 @@ main {
 .display-block {
   display: block !important; }
 
+.scroll {
+  overflow-x: auto;
+  overflow-y: none; }
+

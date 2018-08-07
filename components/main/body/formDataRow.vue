@@ -12,14 +12,14 @@
             <span class="helper-text" data-error="wrong" data-success="right">Enter key</span>
         </div>
         <div class="col-sm-2 col-md-2 input-field text-center">
-  <div class="switch">
-    <label>
-      Text
-      <input :id="'btn-input-type'+ count" @click="changeInputType" type="checkbox">
-      <span class="lever"></span>
-      File
-    </label>
-  </div>
+            <div class="switch">
+                <label>
+                    Text
+                    <input :id="'btn-input-type'+ count" @click="changeInputType" type="checkbox">
+                    <span class="lever"></span>
+                    File
+                </label>
+            </div>
         </div>
         <div class="col-sm-2 col-md-2 text-center">
             <component :is="data.currentInput" :count="count">
@@ -40,37 +40,37 @@
 </template>
 
 <script>
-import TextInput from "./../../widgets/textInput.vue";
-import FileInput from "./../../widgets/fileInput.vue";
+    import TextInput from "./../../widgets/textInput.vue";
+    import FileInput from "./../../widgets/fileInput.vue";
 
-export default {
-  props: ["count"],
-  data: function() {
-    return {
-      data: {
-        currentInput: "app-input-text",
-        checked: false
-      }
+    export default {
+        props: ["count"],
+        data: function () {
+            return {
+                data: {
+                    currentInput: "app-input-text",
+                    checked: false
+                }
+            };
+        },
+        mounted() {
+        },
+        methods: {
+            addNewRow: function (e) {
+                this.$emit("addrow");
+            },
+            changeInputType: function () {
+                this.data.checked = !this.data.checked;
+                if (this.data.checked) {
+                    this.$set(this.data, "currentInput", "app-input-file");
+                } else {
+                    this.$set(this.data, "currentInput", "app-input-text");
+                }
+            }
+        },
+        components: {
+            "app-input-text": TextInput,
+            "app-input-file": FileInput
+        }
     };
-  },
-  mounted() {
-  },
-  methods: {
-    addNewRow: function(e) {
-      this.$emit("addrow");
-    },
-    changeInputType: function() {
-      this.data.checked = !this.data.checked;
-      if (this.data.checked) {
-        this.$set(this.data, "currentInput", "app-input-file");
-      } else {
-        this.$set(this.data, "currentInput", "app-input-text");
-      }
-    }
-  },
-  components: {
-    "app-input-text": TextInput,
-    "app-input-file": FileInput
-  }
-};
 </script>

@@ -1,22 +1,23 @@
 <template>
-            <tr class="h-row">
-                <td><p class="pink-color"><strong>Get</strong></p></td>
-                <td colspan="2"><p>http://www.google.come/api/thi...
-                    <a @click="showDetails" class="floating-eye-btn btn-floating d-none">
-                        <i class="fa fa-eye"></i></a></p></td>
-            </tr>
+    <tr class="h-row">
+        <td><p class="pink-color"><strong>Get</strong></p></td>
+        <td colspan="2"><p>http://www.google.come/api/thi...
+            <a @click="showDetails" class="floating-eye-btn btn-floating d-none">
+                <i class="fa fa-eye"></i></a></p></td>
+    </tr>
 </template>
 
 <script>
-export default {
-  data: function() {
-    return {};
-  },
-  mounted() {},
-  methods: {
-    showDetails: function() {
-      $("#request-details").modal("show");
-    }
-  }
-};
+    export default {
+        data: function () {
+            return {};
+        },
+        mounted() {
+        },
+        methods: {
+            showDetails: function () {
+                $("#request-details").modal("show");
+            }
+        }
+    };
 </script>

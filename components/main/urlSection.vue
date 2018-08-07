@@ -2,14 +2,14 @@
     <div class="container-fuild margin-0 padding-0">
         <div class="row">
             <div class="col-sm-3 col-md-3 text-center">
-  <div class="switch">
-    <label>
-      GET
-      <input id="btn-request-type" @click="changRequestType" type="checkbox">
-      <span class="lever"></span>
-      POST
-    </label>
-  </div>
+                <div class="switch">
+                    <label>
+                        GET
+                        <input id="btn-request-type" @click="changRequestType" type="checkbox">
+                        <span class="lever"></span>
+                        POST
+                    </label>
+                </div>
             </div>
             <div class="col-sm-6 col-md-6 input-field text-center">
                 <input id="url" type="text">
@@ -30,24 +30,24 @@
         data: function () {
             return {
                 methodsTypes: {
-                    checked:false
+                    checked: false
                 }
             };
         },
         mounted() {
-            
+
         },
         methods: {
             changRequestType: function (event) {
                 let el = event.target;
                 let type = "Get";
                 this.methodsTypes.checked = !this.methodsTypes.checked;
-                if(this.methodsTypes.checked){
-                 type = "Post";
+                if (this.methodsTypes.checked) {
+                    type = "Post";
                 }
                 this.$emit("changRequestType", type);
             },
-            showSaveRequest: function (){
+            showSaveRequest: function () {
                 $('#save-request').modal('show');
             }
         }

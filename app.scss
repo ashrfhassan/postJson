@@ -120,10 +120,15 @@ main {
   border-width: 2px;
 }
 
-.modal-dialog{
+.modal-dialog {
   max-width: 1000px !important;
 }
 
-.display-block{
+.display-block {
   display: block !important;
+}
+
+.scroll {
+  overflow-x: auto;
+  overflow-y: none;
 }
