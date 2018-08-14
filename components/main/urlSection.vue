@@ -17,7 +17,7 @@
                 <span class="helper-text" data-error="wrong" data-success="right">Enter URL</span>
             </div>
             <div class="col-sm-3 col-md-3 text-center">
-                <a class='waves-effect waves-light white-btn btn'>Send</a>
+                <a @click="send" class='waves-effect waves-light white-btn btn'>Send</a>
                 <a @click="showSaveRequest" class='waves-effect waves-light white-btn btn'>Save</a>
             </div>
         </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import store from './../../store';
     export default {
         data: function () {
             return {
@@ -49,6 +50,10 @@
             },
             showSaveRequest: function () {
                 $('#save-request').modal('show');
+            },
+            send: function(){
+                store.dispatch('sendRequest');
+                store.commit('increamentHistory');
             }
         }
     };

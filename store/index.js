@@ -6,9 +6,10 @@ import actions from './actions'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {},
+    state: {
+        historyCount: 0
+    },
     mutations: mutations,
     actions: actions,
-    modules: {},
     strict: true
 })
