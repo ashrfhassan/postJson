@@ -56,5 +56,10 @@ export default {
     saveFile: (content, type, fileName) => {
         var blob = new Blob([content], { type: type + ";charset=utf-8" });
         fileSaver.saveAs(blob, fileName);
+    },
+    enhanceRequestUrlLength: (requestUrl) => {
+        if (requestUrl.length > 30)
+            return requestUrl.substr(0, 30) + "...";
+        return requestUrl;
     }
 }

@@ -8,7 +8,7 @@
             </tbody>
         </table>
         <table class="highlight">
-            <tbody>
+            <tbody id="history-requests">
             <app-get-request></app-get-request>
             <app-get-request></app-get-request>
             <app-get-request></app-get-request>

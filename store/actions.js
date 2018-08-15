@@ -1,10 +1,10 @@
 import localStorage from './api/localStorage';
 import utilities from './api/utilities';
 import constants from './constants.json';
+import domChange from './api/domChange';
+
 export default {
     sendRequest: (type, url, dataType, headers, data) => {
-          
-        localStorage.saveUpdateObject(constants.dbFileName, constants.dbFileVersion, constants.historyDatabase, "data", {"name":"ask"});
         // $.ajax({
         //     type: type,
         //     url: url,

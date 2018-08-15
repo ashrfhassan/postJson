@@ -1,7 +1,7 @@
 <template>
     <div>
         <table class="highlight">
-            <tbody>
+            <tbody id="projects-collection">
             <app-side-project></app-side-project>
             <app-side-project></app-side-project>
             <app-side-project></app-side-project>

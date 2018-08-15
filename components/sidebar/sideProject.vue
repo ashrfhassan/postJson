@@ -1,12 +1,12 @@
 <template>
-    <tr>
+    <tr id="collection-project-1">
         <p><strong><a @click="showDetails" class="emerald-link-hover margin-project">Project1</a></strong><a
                 class="btn btn-primary pull-right" @click="toggleProject" data-toggle="collapse"
                 href="#project1" role="button" aria-expanded="false" aria-controls="project1"><i
                 class="fa fa-arrow-right"></i></a></p>
         <div class="collapse multi-collapse" id="project1">
             <table class="highlight">
-                <tbody>
+                <tbody id="collection-project-1-requests">
                 <app-get-request></app-get-request>
                 <app-get-request></app-get-request>
                 <app-post-request></app-post-request>
