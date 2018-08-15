@@ -1,0 +1,9 @@
+{
+    "dbFileName": "postjson",
+    "dbFileVersion": 1.0,
+    "historyDatabase": "_history",
+    "collectionDatabase": "_collection",
+    "getType": "GET",
+    "postType": "POST",
+    "dataTypeJson": "jsonp"
+}

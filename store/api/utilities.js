@@ -1,4 +1,4 @@
-import fileSaver from './../../file-saver';
+import fileSaver from 'file-saver';
 export default {
     getTodayDate: () => {
         var today = new Date();
