@@ -2,9 +2,11 @@ import localStorage from './api/localStorage';
 import utilities from './api/utilities';
 import constants from './constants.json';
 import domChange from './api/domChange';
+var template = require("ejs!./../components/templates/singleRequest.ejs");
 
 export default {
     sendRequest: (type, url, dataType, headers, data) => {
+        alert(template);
         // $.ajax({
         //     type: type,
         //     url: url,

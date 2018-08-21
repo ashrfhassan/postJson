@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -31,7 +32,8 @@ module.exports = {
                     'vue-style-loader',
                     'css-loader'
                 ]
-            }
+            },
+            { test: /\.ejs$/, loader: 'ejs-loader?variable=data' },
         ]
     },
     plugins: [
@@ -41,7 +43,10 @@ module.exports = {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "./app.css"
+        }),
+        new webpack.ProvidePlugin({
+            _: "underscore"
         })
     ],
-    watch: true
+    watch: true,
 };
