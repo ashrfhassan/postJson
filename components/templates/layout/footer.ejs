@@ -1,0 +1,35 @@
+</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script>
+    function toggleHeadersParameters(el) {
+        $(el).data("toggle", !$(el).data("toggle"))
+        if ($(el).data("toggle")) {
+            $('#api-headers-details').removeClass('d-none');
+            $('.api-headers-structure').addClass('d-none');
+        } else {
+            $('#api-headers-details').addClass('d-none');
+            $('#api-headers-structure').removeClass('d-none');
+        }
+    }
+    function togglePostParameters(el) {
+        $(el).data("toggle", !$(el).data("toggle"))
+        if ($(el).data("toggle")) {
+            $('#api-post-details').removeClass('d-none');
+            $('#api-post-structure').addClass('d-none');
+        } else {
+            $('#api-post-details').addClass('d-none');
+            $('#api-post-structure').removeClass('d-none');
+        }
+    }
+    $(document).ready(function () {
+
+    });
+</script>
+</body>
+
+</html>
