@@ -70,17 +70,29 @@
         .json-string {
             color: rgb(66, 66, 4);
         }
+
+        .fixed-sidebar {
+            overflow: hidden;
+            position: fixed;
+            /* Set the navbar to fixed position */
+            left: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo center emerald-color none-decor">{&nbsp;
-                    <span class="white-color">Post Json</span>&nbsp;}</a>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center emerald-color none-decor">{&nbsp;
+                        <span class="white-color">Post Json</span>&nbsp;}</a>
+                </div>
+            </nav>
+        </div>
     </header>
     <main class="full-height">
         <div class="container-fluid full-height margin-0 padding-0">

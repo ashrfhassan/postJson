@@ -70,21 +70,33 @@
         .json-string {
             color: rgb(66, 66, 4);
         }
+
+        .fixed-sidebar {
+            overflow: hidden;
+            position: fixed;
+            /* Set the navbar to fixed position */
+            left: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo center emerald-color none-decor">{&nbsp;
-                    <span class="white-color">Post Json</span>&nbsp;}</a>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center emerald-color none-decor">{&nbsp;
+                        <span class="white-color">Post Json</span>&nbsp;}</a>
+                </div>
+            </nav>
+        </div>
     </header>
     <main class="full-height">
         <div class="container-fluid full-height margin-0 padding-0">
-            <div class="row">
+            <div class="card-panel scrollspy row">
                 <div class="col-sm-12 col-md-12">
                     <div class="container-fluid margin-0 padding-0">
                         <div class="row">
@@ -112,7 +124,7 @@
                                             <label>
                                                 View
                                                 <input type="checkbox">
-                                                <span onclick="toggleHeadersParameters(this)" class="lever" data-toggle="false"></span>
+                                                <span onclick="toggleHeadersParameters(this)" class="lever" data-toggle="false" data-count="0"></span>
                                                 Details
                                             </label>
                                         </div>
@@ -120,8 +132,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center raw-input">
-                                <pre id="api-headers-structure" class="">{"accesstoken":String,"verificationcode":String}</pre>
-                                <div id="api-headers-details" class="d-none">
+                                <pre id="api-headers-structure-0" class="">{"accesstoken":String,"verificationcode":String}</pre>
+                                <div id="api-headers-details-0" class="d-none">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 text-center">
                                             <p class="pink-color">accesstoken</p>
@@ -157,7 +169,7 @@
                                             <label>
                                                 View
                                                 <input type="checkbox">
-                                                <span onclick="togglePostParameters(this)" class="lever" data-toggle="false"></span>
+                                                <span onclick="togglePostParameters(this)" class="lever" data-toggle="false" data-count="0"></span>
                                                 Details
                                             </label>
                                         </div>
@@ -165,8 +177,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center raw-input">
-                                <pre id="api-post-structure" class="">{"accesstoken":String,"verificationcode":String}</pre>
-                                <div id="api-post-details" class="d-none">
+                                <pre id="api-post-structure-0" class="">{"accesstoken":String,"verificationcode":String}</pre>
+                                <div id="api-post-details-0" class="d-none">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 text-center">
                                             <p class="pink-color">accesstoken</p>
@@ -222,34 +234,37 @@
             </div>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
     <script>
         function toggleHeadersParameters(el) {
+            var count = $(el).data("count");
             $(el).data("toggle", !$(el).data("toggle"))
             if ($(el).data("toggle")) {
-                $('#api-headers-details').removeClass('d-none');
-                $('.api-headers-structure').addClass('d-none');
+                $('#api-headers-details-' + count).removeClass('d-none');
+                $('.api-headers-structure-' + count).addClass('d-none');
             } else {
-                $('#api-headers-details').addClass('d-none');
-                $('#api-headers-structure').removeClass('d-none');
+                $('#api-headers-details-' + count).addClass('d-none');
+                $('#api-headers-structure-' + count).removeClass('d-none');
             }
         }
         function togglePostParameters(el) {
+            var count = $(el).data("count");
             $(el).data("toggle", !$(el).data("toggle"))
             if ($(el).data("toggle")) {
-                $('#api-post-details').removeClass('d-none');
-                $('#api-post-structure').addClass('d-none');
+                $('#api-post-details-' + count).removeClass('d-none');
+                $('#api-post-structure-' + count).addClass('d-none');
             } else {
-                $('#api-post-details').addClass('d-none');
-                $('#api-post-structure').removeClass('d-none');
+                $('#api-post-details-' + count).addClass('d-none');
+                $('#api-post-structure-' + count).removeClass('d-none');
             }
         }
         $(document).ready(function () {
-
+            $('.scrollspy').scrollSpy();
         });
     </script>
 </body>
