@@ -56,3 +56,5 @@ to start development with watcher just open a terminal onproject directory and r
 
 5- MaterializeCss Release: 1.0.0-rc.2
 
+6- templating engine loader EJS
+

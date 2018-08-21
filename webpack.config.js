@@ -33,7 +33,7 @@ module.exports = {
                     'css-loader'
                 ]
             },
-            { test: /\.ejs$/, loader: 'ejs-loader?variable=data' },
+            { test: /\.ejs$/, loader: 'ejs-loader' },
         ]
     },
     plugins: [

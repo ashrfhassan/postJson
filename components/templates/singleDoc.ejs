@@ -1,136 +1,148 @@
 <div class="card-panel scrollspy row">
-        <div class="col-sm-12 col-md-12">
-            <div class="container-fluid margin-0 padding-0">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h5>API Name</h5>
+    <div class="col-sm-12 col-md-12">
+        <div class="container-fluid margin-0 padding-0">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h5>
+                        <%= data.name %>
+                    </h5>
+                </div>
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h6>Sent at
+                        <i class="api-sent-date">
+                            <%= data.sentAt %>
+                        </i>
+                    </h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <h6>Headers</h6>
+                            <br>
+                            <br>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h6>Sent at
-                            <i class="api-sent-date">0000-00-00 00:00:00</i>
-                        </h6>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <div class="switch">
+                                <label>
+                                    View
+                                    <input type="checkbox">
+                                    <span onclick="toggleHeadersParameters(this)" class="lever" data-toggle="false" data-count="<%= data.count %>"></span>
+                                    Details
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
-                                <h6>Headers</h6>
-                                <br>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
-                                <div class="switch">
-                                    <label>
-                                        View
-                                        <input type="checkbox">
-                                        <span onclick="toggleHeadersParameters(this)" class="lever" data-toggle="false" data-count="0"></span>
-                                        Details
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center raw-input">
-                        <pre id="api-headers-structure-0" class="">{"accesstoken":String,"verificationcode":String}</pre>
-                        <div id="api-headers-details-0" class="d-none">
+                <div class="col-md-6 col-sm-6 text-center raw-input">
+                    <pre id="api-headers-structure-<%= data.count %>" class=""><%= data.headers %></pre>
+                    <div id="api-headers-details-<%= data.count %>" class="d-none">
+                        <% data.headersDetails.forEach(function(item){ %>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 text-center">
-                                    <p class="pink-color">accesstoken</p>
+                                    <p class="pink-color">
+                                        <%= item.name %>
+                                    </p>
                                 </div>
                                 <div class="col-md-6 col-sm-6 text-center">
-                                    <p class="emerald-color">required</p>
+                                    <p class="emerald-color">
+                                        <%= item.status %>
+                                    </p>
                                 </div>
                                 <div class="col-md-12 col-sm-12 text-center">
                                     <p class="flow-text">
-                                        One common flaw we've seen in many frameworks is a lack of support for truly responsive text. While elements on the page
-                                        resize fluidly, text still resizes on a fixed basis. To ameliorate this problem,
-                                        for text heavy pages, we've created a class that fluidly scales text size
-                                        and line-height to optimize readability for the user. Line length stays
+                                        <%= item.comment %>
                                     </p>
                                 </div>
                             </div>
                             <div class="divider"></div>
+                            <% }); %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <h6>Post Parameters</h6>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                            <div class="switch">
+                                <label>
+                                    View
+                                    <input type="checkbox">
+                                    <span onclick="togglePostParameters(this)" class="lever" data-toggle="false" data-count="<%= data.count %>"></span>
+                                    Details
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
-                                <h6>Post Parameters</h6>
-                                <br>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
-                                <div class="switch">
-                                    <label>
-                                        View
-                                        <input type="checkbox">
-                                        <span onclick="togglePostParameters(this)" class="lever" data-toggle="false" data-count="0"></span>
-                                        Details
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center raw-input">
-                        <pre id="api-post-structure-0" class="">{"accesstoken":String,"verificationcode":String}</pre>
-                        <div id="api-post-details-0" class="d-none">
+                <div class="col-md-6 col-sm-6 text-center raw-input">
+                    <pre id="api-post-structure-<%= data.count %>" class=""><%= data.parameters %></pre>
+                    <div id="api-post-details-<%= data.count %>" class="d-none">
+                        <% data.parametersDetails.forEach(function(item){ %>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 text-center">
-                                    <p class="pink-color">accesstoken</p>
+                                    <p class="pink-color">
+                                        <%= item.name %>
+                                    </p>
                                 </div>
                                 <div class="col-md-6 col-sm-6 text-center">
-                                    <p class="emerald-btn">required</p>
+                                    <p class="emerald-color">
+                                        <%= item.status %>
+                                    </p>
                                 </div>
                                 <div class="col-md-12 col-sm-12 text-center">
                                     <p class="flow-text">
-                                        One common flaw we've seen in many frameworks is a lack of support for truly responsive text. While elements on the page
-                                        resize fluidly, text still resizes on a fixed basis. To ameliorate this problem,
-                                        for text heavy pages, we've created a class that fluidly scales text size
-                                        and line-height to optimize readability for the user. Line length stays
+                                        <%= item.comment %>
                                     </p>
                                 </div>
                             </div>
                             <div class="divider"></div>
-                        </div>
+                            <% }); %>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h6>Output Structure</h6>
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center raw-input">
-                        <pre class="api-output-structure">{"accesstoken":String,"verificationcode":String}</pre>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h6>Output Structure</h6>
                 </div>
-                <div class="divider"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 text-center">
-                        <h5>Example</h5>
-                    </div>
+                <div class="col-md-6 col-sm-6 text-center raw-input">
+                    <pre class="api-output-structure"><%= data.output %></pre>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h6>Url</h6>
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h6>{"accesstoken":String,"verificationcode":String}</h6>
-                    </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <h5>Example</h5>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center">
-                        <h6>Input</h6>
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center raw-input">
-                        <pre class="api-input-structure">{"accesstoken":String,"verificationcode":String}</pre>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h6>Url</h6>
+                </div>
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h6>
+                        <%= data.url %>
+                    </h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+                    <h6>Input</h6>
+                </div>
+                <div class="col-md-6 col-sm-6 text-center raw-input">
+                    <pre class="api-input-structure"><%= data.input %></pre>
                 </div>
             </div>
         </div>
     </div>
+</div>
