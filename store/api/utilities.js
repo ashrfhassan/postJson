@@ -61,5 +61,8 @@ export default {
         if (requestUrl.length > 30)
             return requestUrl.substr(0, 30) + "...";
         return requestUrl;
+    },
+    renderEjsFile: (template, data) => {
+     return template(data);
     }
 }
