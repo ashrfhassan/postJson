@@ -29,13 +29,24 @@
             </keep-alive>
         </div>
         <div class="container-fuild margin-0 padding-0">
-
             <div class="row">
-                <div class="col-sm-12 col-md-12 text-center">
+                <div class="col-sm-1 offset-sm-5 col-md-1 offset-md-5 text-center">
                     <h5>Response</h5>
                 </div>
-                <div class="col-sm-12 col-md-12 text-center">
-                    <pre id="main-response" class="raw-input">{"accesstoken":String,"verificationcode":String}</pre>
+                <div class="col-sm-3 offset-sm-3 col-md-3 offset-md-3 text-center">
+                    <div class="switch">
+                    <label>
+                        Raw
+                        <input type="checkbox">
+                        <span @click="swapResponseView" class="lever"></span>
+                        Preview
+                    </label>
+                </div>
+                </div>
+                <div class="col-sm-12 col-md-12 raw-input text-center">
+                    <keep-alive>
+                    <component :is="this.swaper.responseView"></component>
+                    </keep-alive>
                 </div>
             </div>
         </div>
@@ -43,51 +54,64 @@
 </template>
 
 <script>
-    import URLSection from "./../main/urlSection.vue";
-    import Headers from "./../main/headers/requestHeaders.vue";
-    import Body from "./../main/body/requestBody.vue";
+import URLSection from "./../main/urlSection.vue";
+import Headers from "./../main/headers/requestHeaders.vue";
+import Body from "./../main/body/requestBody.vue";
+import ResponseRaw from "./../main/body/responseRaw.vue";
+import ResponsePreview from "./../main/body/responsePreview.vue";
 
-    export default {
-        data: function () {
-            return {
-                swaper: {
-                    isActiveHeaders: true,
-                    isActiveBody: false,
-                    currentView: "Headers",
-                    isFullROW: true
-                }
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            toggleHeaderBody: function (el) {
-                let elementID = el.target.id;
-                if (elementID == "headers-tab") {
-                    this.$set(this.swaper, "isActiveHeaders", true);
-                    this.$set(this.swaper, "isActiveBody", false);
-                    this.$set(this.swaper, "currentView", "Headers");
-                } else {
-                    this.$set(this.swaper, "isActiveHeaders", false);
-                    this.$set(this.swaper, "isActiveBody", true);
-                    this.$set(this.swaper, "currentView", "Body");
-                }
-            },
-            changRequestType: function (type) {
-                if (type == "Get") {
-                    this.$set(this.swaper, "isActiveHeaders", true);
-                    this.$set(this.swaper, "isActiveBody", false);
-                    this.$set(this.swaper, "currentView", "Headers");
-                    this.$set(this.swaper, "isFullROW", true);
-                } else {
-                    this.$set(this.swaper, "isFullROW", false);
-                }
-            }
-        },
-        components: {
-            "app-urlsection": URLSection,
-            Headers: Headers,
-            Body: Body
-        }
+export default {
+  data: function() {
+    return {
+      swaper: {
+        isActiveHeaders: true,
+        isActiveBody: false,
+        currentView: "Headers",
+        isFullROW: true,
+        responseView: "ResponseRaw",
+        isRawResponse: true
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    toggleHeaderBody: function(el) {
+      let elementID = el.target.id;
+      if (elementID == "headers-tab") {
+        this.$set(this.swaper, "isActiveHeaders", true);
+        this.$set(this.swaper, "isActiveBody", false);
+        this.$set(this.swaper, "currentView", "Headers");
+      } else {
+        this.$set(this.swaper, "isActiveHeaders", false);
+        this.$set(this.swaper, "isActiveBody", true);
+        this.$set(this.swaper, "currentView", "Body");
+      }
+    },
+    swapResponseView: function(el) {
+      this.swaper.isRawResponse = !this.swaper.isRawResponse;
+      if (this.swaper.isRawResponse) {
+        this.$set(this.swaper, "responseView", "ResponseRaw");
+      } else {
+        this.$set(this.swaper, "responseView", "ResponsePreview");
+      }
+    },
+    changRequestType: function(type) {
+      if (type == "Get") {
+        this.$set(this.swaper, "isActiveHeaders", true);
+        this.$set(this.swaper, "isActiveBody", false);
+        this.$set(this.swaper, "currentView", "Headers");
+        this.$set(this.swaper, "isFullROW", true);
+      } else {
+        this.$set(this.swaper, "isFullROW", false);
+      }
+    }
+  },
+  components: {
+    "app-urlsection": URLSection,
+    Headers: Headers,
+    Body: Body,
+    ResponseRaw: ResponseRaw,
+    ResponsePreview: ResponsePreview
+  }
+};
 </script>
