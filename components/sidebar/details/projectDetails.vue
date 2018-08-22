@@ -46,23 +46,29 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a @click="closeModal" class="float-right waves-effect waves-light white-btn btn">Close</a>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                    <a class="waves-effect waves-light white-btn pink-back-btn btn">Delete</a>
+                        </div>
+                                                <div class="col-sm-6 col-md-6">
+                    <a @click="closeModal" class="waves-effect waves-light white-btn btn">Close</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default {
-        data: function () {
-            return {};
-        },
-        mounted() {
-        },
-        methods: {
-            closeModal: function () {
-                $("#project-details").modal("hide");
-            }
-        }
-    };
+export default {
+  data: function() {
+    return {};
+  },
+  mounted() {},
+  methods: {
+    closeModal: function() {
+      $("#project-details").modal("hide");
+    }
+  }
+};
 </script>
