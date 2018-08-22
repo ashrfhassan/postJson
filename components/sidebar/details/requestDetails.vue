@@ -80,7 +80,7 @@
                                 <h6>Output Structure</h6>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center raw-input">
-                                <pre id="api-output-structure">{"accesstoken":String,"verificationcode":String}</pre>
+                                <pre id="api-output-structure"></pre>
                             </div>
                         </div>
                         <div class="divider"></div>
@@ -94,7 +94,7 @@
                                 <h6>Url</h6>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center">
-                                <h6>{"accesstoken":String,"verificationcode":String}</h6>
+                                <h6>url</h6>
                             </div>
                         </div>
                         <div class="row">
@@ -102,7 +102,7 @@
                                 <h6>Input</h6>
                             </div>
                             <div class="col-md-6 col-sm-6 text-center raw-input">
-                                <pre id="api-input-structure">{"accesstoken":String,"verificationcode":String}</pre>
+                                <pre id="api-input-structure"></pre>
                             </div>
                         </div>
                     </div>

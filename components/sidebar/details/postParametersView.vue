@@ -1,5 +1,5 @@
 <template>
-    <pre id="api-post-structure">{"accesstoken":String,"verificationcode":String}</pre>
+    <pre id="api-post-structure"></pre>
 </template>
 
 <script>

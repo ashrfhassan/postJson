@@ -1,5 +1,5 @@
 <template>
-    <pre id="main-response">{"accesstoken":String,"verificationcode":String}</pre>
+    <pre id="main-response"></pre>
 </template>
 <script>
     export default{

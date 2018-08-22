@@ -1,5 +1,5 @@
 <template>
-    <pre id="api-headers-structure">{"accesstoken":String,"verificationcode":String}</pre>
+    <pre id="api-headers-structure"></pre>
 </template>
 
 <script>
