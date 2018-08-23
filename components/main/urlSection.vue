@@ -26,35 +26,44 @@
 </template>
 
 <script>
-import store from './../../store';
-    export default {
-        data: function () {
-            return {
-                methodsTypes: {
-                    checked: false
-                }
-            };
-        },
-        mounted() {
+import store from "./../../store";
+import constants from "./../../store/constants.json";
 
-        },
-        methods: {
-            changRequestType: function (event) {
-                let el = event.target;
-                let type = "Get";
-                this.methodsTypes.checked = !this.methodsTypes.checked;
-                if (this.methodsTypes.checked) {
-                    type = "Post";
-                }
-                this.$emit("changRequestType", type);
-            },
-            showSaveRequest: function () {
-                $('#save-request').modal('show');
-            },
-            send: function(){
-                store.dispatch('sendRequest');
-                store.commit('increamentHistory');
-            }
-        }
+export default {
+  data: function() {
+    return {
+      methodsTypes: {
+        checked: false
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    changRequestType: function(event) {
+      let el = event.target;
+      let type = "Get";
+      this.methodsTypes.checked = !this.methodsTypes.checked;
+      if (this.methodsTypes.checked) {
+        type = "Post";
+      }
+      this.$emit("changRequestType", type);
+    },
+    showSaveRequest: function() {
+      $("#save-request").modal("show");
+    },
+    send: function() {
+      let type = constants.getType;
+      if (this.methodsTypes.checked) {
+        type = constants.postType;
+      }
+      let url = $("#url").val();
+      let dataType = constants.dataTypeJson;
+      let headers = store.getters.currentHeaders;
+      let data = store.getters.currentRawBody;
+      if (store.getters.currentBodyType === constants.bodyForm)
+        data = store.getters.currentFormBody;
+      store.dispatch("sendRequest", type, url, dataType, headers, data);
+    }
+  }
+};
 </script>

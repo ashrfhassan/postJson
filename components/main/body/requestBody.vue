@@ -26,28 +26,30 @@
 </template>
 
 <script>
-    import Raw from "./rawRequest.vue";
-    import Form from "./formDataRequest.vue";
-
-    export default {
-        data: function () {
-            return {
-                swaper: {
-                    currentView: "Raw"
-                }
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            toggleRawForm: function (el) {
-                let elementID = el.target.id;
-                this.$set(this.swaper, "currentView", elementID);
-            }
-        },
-        components: {
-            Raw: Raw,
-            Form: Form
-        }
+import Raw from "./rawRequest.vue";
+import Form from "./formDataRequest.vue";
+import constants from "./../../../store/constants.json";
+import { mapMutations } from "vuex";
+export default {
+  data: function() {
+    return {
+      swaper: {
+        currentView: constants.bodyRaw
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    toggleRawForm: function(el) {
+      let elementID = el.target.id;
+      this.$set(this.swaper, "currentView", elementID);
+      this.setCurrentBodyType(elementID);
+    },
+    ...mapMutations(["setCurrentBodyType"])
+  },
+  components: {
+    Raw: Raw,
+    Form: Form
+  }
+};
 </script>

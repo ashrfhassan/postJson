@@ -5,6 +5,8 @@ import domChange from './api/domChange';
 
 export default {
     sendRequest: (state, type, url, dataType, headers, data) => {
+        // if(!$('#loader').hasClass('d-none'))
+        // return false;
         // $.ajax({
         //     type: type,
         //     url: url,
