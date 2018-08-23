@@ -12,8 +12,5 @@ export default {
         return 0;
         else
         return lastRequest.prop("id").split("-")[2];
-    },
-    addNewSideHistory: (request) => {
-
     }
 }

@@ -7,7 +7,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        historyCount: 0
+        historyRequests: [],
+        collectionProjects: []
+    },
+    getters: {
+        historyRequests: state => state.historyRequests.reverse(),
+        collectionProjects: state => state.collectionProjects.reverse(),
     },
     mutations: mutations,
     actions: actions,

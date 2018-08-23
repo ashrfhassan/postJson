@@ -1,5 +1,8 @@
 export default {
-    increamentHistory: (state) => {
-        state.historyCount++;
+    newHistory: (state, request) => {
+        state.historyRequests.push(request);
+    },
+    newProject: (state, project) => {
+        state.collectionProjects.push(project);
     }
 }

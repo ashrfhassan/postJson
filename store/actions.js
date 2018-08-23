@@ -4,7 +4,7 @@ import constants from './constants.json';
 import domChange from './api/domChange';
 
 export default {
-    sendRequest: (type, url, dataType, headers, data) => {
+    sendRequest: (state, type, url, dataType, headers, data) => {
         // $.ajax({
         //     type: type,
         //     url: url,
@@ -12,6 +12,7 @@ export default {
         //     data:data,
         //     crossDomain: true,
         //     beforeSend: function setHeader(httpReq) {
+        //         $('#loader').removeClass('d-none');
         //         $.each(headers, function( key, value ) {
         //             httpReq.setRequestHeader(key, value);
         //         });
@@ -37,6 +38,8 @@ export default {
         //         500: function () {
         //         }
         //     }
+        // }).done(function(){
+        //     $('#loader').addClass('d-none');
         // });
     }
 }
