@@ -6,8 +6,6 @@ import constants from "./constants.json";
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
-
 export default new Vuex.Store({
     state: {
         historyRequests: [],
@@ -27,6 +25,5 @@ export default new Vuex.Store({
     },
     mutations: mutations,
     actions: actions,
-    strict: debug,
-    plugins: debug ? [createLogger()] : []
+    strict: false
 })
