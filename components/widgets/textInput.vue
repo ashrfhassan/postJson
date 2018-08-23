@@ -8,6 +8,7 @@
 
 <script>
     export default {
+        props: ["count"],
         data: function () {
             return {};
         },

@@ -1,7 +1,7 @@
 <template>
     <div id="main-form-data" class="container-fluid margin-0 padding-0 form-data-scroll">
         <form action="post" enctype="multipart/form-data">
-            <app-formrow v-for="count in rowsCount" v-bind:key="count.num" @addrow="addNewRow(count.num)"
+            <app-formrow v-for="count in this.rowsCount" v-bind:key="count.num" @addrow="addNewRow(count.num)"
                          :count="count.num"></app-formrow>
         </form>
     </div>
