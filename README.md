@@ -38,23 +38,7 @@ This tool is amazing you can easily
 
 after cloning this repo
 
-Run **npm install**
+Run **yarn install**
 
-Note: in case you are using Linux or MacOS
-you may face trouble with **node-sass** , if so just make sure to have your node_modules directory with Read/Write premission with all sub-directories then re-run **npm install**
-
-to start development with watcher just open a terminal onproject directory and run **npm start**
-#### Frameworks used to build this tool
-
-1- VueJs v2.X
-
-2- bootstrap 4.1.3
-
-3- jquery v3.3.1
-
-4- popperJs version 1.14.3
-
-5- MaterializeCss Release: 1.0.0-rc.2
-
-6- templating engine loader EJS
+to start development with watcher just open a terminal on project directory and run **yarn serve** it will be listening on http://localhost:6363/
 

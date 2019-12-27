@@ -1,0 +1,23 @@
+.scroll {
+  overflow-x: auto;
+  overflow-y: none;
+}
+
+.form-data-scroll {
+  min-height: 400px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.scroll-headers {
+  max-height: 440px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.scroll-sideBar {
+  max-height: 570px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

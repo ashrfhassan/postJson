@@ -1,0 +1,51 @@
+export default {
+    "dbFileName": "postjson",
+    "dbFileVersion": 1.0,
+    "historyDatabase": "_history",
+    "collectionDatabase": "_collection",
+    "getType": "GET",
+    "postType": "POST",
+    "bodyRaw":"Raw",
+    "bodyForm":"Form",
+    "dataTypeJson": "jsonp",
+    "objectsFormat": {
+        "request": {
+            "key":"",
+            "type":"",
+            "typeComponent":"",
+            "name":"",
+            "sentDate":"",
+            "url":"",
+            "headers":[],
+            "headersEx":[],
+            "bodyType":"",
+            "bodyRaw":{},
+            "bodyForm":[],
+            "bodyRawEx":{},
+            "bodyFormEx":[],
+            "response":{}
+        },
+        "requestHeader":{
+            "isSent": "bool",
+            "key":"",
+            "value":"",
+            "isRequired":"bool",
+            "description":""
+        },
+        "requestBody":{
+            "isSent": "bool",
+            "inputType":"",
+            "key":"",
+            "value":"",
+            "isRequired":"bool",
+            "description":""
+        },
+        "collectionProject":{
+            "key":"",
+            "name":"",
+            "mainUrl":"",
+            "comments":"",
+            "requests":[]
+        }
+    }
+}

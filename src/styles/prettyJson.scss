@@ -1,17 +1,19 @@
+@import "_colors";
+
 .raw-input {
-    background-color: ghostwhite;
-    border: 1px solid silver;
-    padding: 5px 10px;
+  background-color: ghostwhite;
+  border: 1px solid silver;
+  padding: 5px 10px;
 }
 
 .json-key {
-    color: brown;
+  color: $json-key;
 }
 
 .json-value {
-    color: navy;
+  color: $json-value;
 }
 
 .json-string {
-    color: rgb(66, 66, 4);
+  color: $json-string;
 }
