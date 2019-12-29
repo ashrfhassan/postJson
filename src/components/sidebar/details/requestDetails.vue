@@ -7,34 +7,34 @@
                     <h5 class="modal-title">Request details</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid margin-0 padding-0">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                    <b-container fluid class="margin-0 padding-0">
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <a class="waves-effect waves-light pink lighten-1 white-btn pulse btn">Generate
                                     Document</a>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <a class="waves-effect waves-light white-btn btn">Try it</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h5>API Name</h5>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>Sent at <i id="api-sent-date">0000-00-00 00:00:00</i></h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
+                                <b-row>
+                                    <b-col sm="12" md="12" class="text-center">
                                         <h6>Headers</h6>
                                         <br><br>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 text-center">
+                                    </b-col>
+                                </b-row>
+                                <b-row>
+                                    <b-col sm="12" md="12" class="text-center">
                                         <div class="switch">
                                             <label>
                                                 View
@@ -43,23 +43,23 @@
                                                 Details
                                             </label>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center raw-input">
+                                    </b-col>
+                                </b-row>
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center raw-input">
                                 <component :is="data.headersParameters"></component>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
+                                <b-row>
+                                    <b-col sm="12" md="12" class="text-center">
                                         <h6>Post Parameters</h6>
                                         <br><br>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 text-center">
+                                    </b-col>
+                                </b-row>
+                                <b-row>
+                                    <b-col sm="12" md="12" class="text-center">
                                         <div class="switch">
                                             <label>
                                                 View
@@ -68,44 +68,44 @@
                                                 Details
                                             </label>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center raw-input">
+                                    </b-col>
+                                </b-row>
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center raw-input">
                                 <component :is="data.postParameters"></component>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>Output Structure</h6>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center raw-input">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center raw-input">
                                 <pre id="api-output-structure"></pre>
-                            </div>
-                        </div>
+                            </b-col>
+                        </b-row>
                         <div class="divider"></div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
+                        <b-row>
+                            <b-col sm="12" md="12" class="text-center">
                                 <h5>Example</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>Url</h6>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>url</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>Input</h6>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center raw-input">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center raw-input">
                                 <pre id="api-input-structure"></pre>
-                            </div>
-                        </div>
-                    </div>
+                            </b-col>
+                        </b-row>
+                    </b-container>
                 </div>
                 <div class="modal-footer">
                     <a @click="closeModal" class="float-right waves-effect waves-light white-btn btn">Close</a>

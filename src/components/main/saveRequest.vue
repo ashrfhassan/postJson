@@ -7,12 +7,12 @@
                     <h5 class="modal-title">Save request</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid margin-0 padding-0">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
+                    <b-container fluid class="margin-0 padding-0">
+                        <b-row>
+                            <b-col sm="12" md="12" class="text-center">
                                 <h5>project</h5>
-                            </div>
-                            <div class="col-md-12 col-sm-12 text-center">
+                            </b-col>
+                            <b-col sm="12" md="12" class="text-center">
                                 <div class="switch">
                                     <label>
                                         New
@@ -21,12 +21,12 @@
                                         Exist
                                     </label>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
+                            </b-col>
+                            <b-col sm="12" md="12">
                                 <component :is="data.currentView"></component>
-                            </div>
-                        </div>
-                    </div>
+                            </b-col>
+                        </b-row>
+                    </b-container>
                 </div>
                 <div class="modal-footer">
                     <a @click="closeModal" class="float-right waves-effect waves-light white-btn btn">Close</a>

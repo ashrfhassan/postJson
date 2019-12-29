@@ -1,14 +1,14 @@
 <template>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 input-field text-center">
+    <b-row>
+        <b-col sm="12" md="12" class="input-field text-center">
             <select class="display-block">
                 <option value="" disabled selected>Choose your option</option>
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
                 <option value="3">Option 3</option>
             </select>
-        </div>
-    </div>
+        </b-col>
+    </b-row>
 </template>
 
 <script>

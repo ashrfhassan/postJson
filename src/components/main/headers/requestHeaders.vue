@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div id="main-headers" class="container-fluid margin-0 padding-0 scroll-headers">
+        <b-container fluid id="main-headers" class="margin-0 padding-0 scroll-headers">
             <app-headerrow v-for="count in rowsCount"
                            v-bind:key="count.num"
                            @addrow="addNewRow(count.num)"
                            :count="count.num"/>
-        </div>
+        </b-container>
     </div>
 </template>
 

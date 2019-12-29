@@ -1,7 +1,7 @@
 <template>
-    <div class="container-fuild margin-0 padding-0">
-        <div class="row">
-            <div class="col-sm-3 col-md-3 text-center">
+    <b-container fluid class="margin-0 padding-0">
+        <b-row>
+            <b-col sm="3" md="3" class="text-center">
                 <div class="switch">
                     <label>
                         GET
@@ -10,19 +10,19 @@
                         POST
                     </label>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-6 input-field text-center">
+            </b-col>
+            <b-col sm="6" md="6" class="input-field text-center">
                 <input id="url" type="text">
                 <label for="url">URL</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Enter URL</span>
-            </div>
-            <div class="col-sm-3 col-md-3 text-center">
+            </b-col>
+            <b-col sm="3" md="3" class="text-center">
                 <a @click="send" class='waves-effect waves-light white-btn btn'>Send</a>
                 <a @click="showSaveRequest" class='waves-effect waves-light white-btn btn'>Save</a>
-            </div>
-        </div>
+            </b-col>
+        </b-row>
         <div class="divider"></div>
-    </div>
+    </b-container>
 </template>
 
 <script>

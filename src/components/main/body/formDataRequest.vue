@@ -1,12 +1,12 @@
 <template>
-    <div id="main-form-data" class="container-fluid margin-0 padding-0 form-data-scroll">
+    <b-container fluid id="main-form-data" class="margin-0 padding-0 form-data-scroll">
         <form action="post" enctype="multipart/form-data">
             <app-formrow v-for="count in this.rowsCount"
                          v-bind:key="count.num"
                          @addrow="addNewRow(count.num)"
                          :count="count.num"/>
         </form>
-    </div>
+    </b-container>
 </template>
 
 <script>

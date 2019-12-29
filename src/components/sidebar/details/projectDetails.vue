@@ -7,53 +7,51 @@
                     <h5 class="modal-title">Project details</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid margin-0 padding-0">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <a class="waves-effect waves-light pink lighten-1 white-btn pulse btn">Generate
                                     Document</a>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <a class="waves-effect waves-light white-btn btn">Export</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h5>Project Name</h5>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>url</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h5>Project main url</h5>
-                            </div>
-                            <div class="col-md-6 col-sm-6 text-center">
+                            </b-col>
+                            <b-col sm="6" md="6" class="text-center">
                                 <h6>url</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="12" md="12" class="text-center">
                                 <h5>Comments</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 text-center">
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="12" md="12" class="text-center">
                                 <p id="project-comments" class="flow-text"></p>
-                            </div>
-                        </div>
-                    </div>
+                            </b-col>
+                        </b-row>
                 </div>
                 <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6">
+                    <b-row>
+                        <b-col sm="6" md="6">
                             <a class="waves-effect waves-light white-btn pink-back-btn btn">Delete</a>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
+                        </b-col>
+                        <b-col sm="6" md="6">
                             <a @click="closeModal" class="waves-effect waves-light white-btn btn">Close</a>
-                        </div>
-                    </div>
+                        </b-col>
+                    </b-row>
                 </div>
             </div>
         </div>

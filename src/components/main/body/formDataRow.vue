@@ -1,17 +1,17 @@
 <template>
-    <div :id="'form-data-row-'+ count" class="row">
-        <div class="col-sm-1 col-md-1 text-center">
+    <b-row :id="'form-data-row-'+ count">
+        <b-col sm="1" md="1" class="text-center">
             <label>
                 <input :id="'send-check-'+ count" type="checkbox" checked="checked"/>
                 <span></span>
             </label>
-        </div>
-        <div class="col-sm-2 col-md-2 input-field text-center">
+        </b-col>
+        <b-col sm="2" md="2" class="input-field text-center">
             <input :id="'key-'+ count" type="text" @keyup="addNewRow">
             <label :for="'key-'+ count">Key</label>
             <span class="helper-text" data-error="wrong" data-success="right">Enter key</span>
-        </div>
-        <div class="col-sm-2 col-md-2 input-field text-center">
+        </b-col>
+        <b-col sm="2" md="2" class="input-field text-center">
             <div class="switch">
                 <label>
                     Text
@@ -20,23 +20,23 @@
                     File
                 </label>
             </div>
-        </div>
-        <div class="col-sm-2 col-md-2 text-center">
+        </b-col>
+        <b-col sm="2" md="2" class="text-center">
             <component :is="data.currentInput" :count="count">
 
             </component>
-        </div>
-        <div class="col-sm-2 col-md-2 text-center">
+        </b-col>
+        <b-col sm="2" md="2" class="text-center">
             <label>
                 <input :id="'required-check-'+ count" type="checkbox" checked="checked"/>
                 <span>Required</span>
             </label>
-        </div>
-        <div class="col-sm-3 col-md-3 input-field text-center">
+        </b-col>
+        <b-col sm="3" md="3" class="input-field text-center">
             <textarea :id="'desc-'+ count" class="materialize-textarea"></textarea>
             <label :for="'desc-'+ count">Description</label>
-        </div>
-    </div>
+        </b-col>
+    </b-row>
 </template>
 
 <script>
