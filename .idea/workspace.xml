@@ -3,17 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="69a76d1e-969c-4ed6-82a6-bb904f162553" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/body/formDataRequest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/body/formDataRequest.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/body/formDataRow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/body/formDataRow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/body/requestBody.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/body/requestBody.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/headers/headerRow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/headers/headerRow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/headers/requestHeaders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/headers/requestHeaders.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/save/newproject.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/save/newproject.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/save/selectproject.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/save/selectproject.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/saveRequest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/saveRequest.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/urlSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/urlSection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/details/items/headersParaDetailItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/details/items/headersParaDetailItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar/details/items/postParaDetailItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/details/items/postParaDetailItem.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sidebar/details/projectDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/details/projectDetails.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sidebar/details/requestDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidebar/details/requestDetails.vue" afterDir="false" />
     </list>
@@ -83,7 +78,8 @@
       <workItem from="1576842449121" duration="14235000" />
       <workItem from="1577436724309" duration="1208000" />
       <workItem from="1577619132133" duration="610000" />
-      <workItem from="1577642456365" duration="5015000" />
+      <workItem from="1577642456365" duration="5831000" />
+      <workItem from="1578402991915" duration="2469000" />
     </task>
     <servers />
   </component>

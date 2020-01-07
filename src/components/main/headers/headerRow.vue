@@ -6,12 +6,12 @@
                 <span></span>
             </label>
         </b-col>
-        <b-col sm="2" md="2" class="input-field text-center">
+        <b-col sm="2" md="2" class="text-center">
             <input :id="'key-'+ count" type="text" @keyup="addNewRow">
             <label :for="'key-'+ count">Key</label>
             <span class="helper-text" data-error="wrong" data-success="right">Enter key</span>
         </b-col>
-        <b-col sm="2" md="2" class="input-field text-center">
+        <b-col sm="2" md="2" class="text-center">
             <input :id="'value-'+ count" type="text">
             <label :for="'value-'+ count">Value</label>
             <span class="helper-text" data-error="wrong" data-success="right">Enter Value</span>
@@ -22,7 +22,7 @@
                 <span>Required</span>
             </label>
         </b-col>
-        <b-col sm="5" md="5" class="input-field text-center">
+        <b-col sm="5" md="5" class="text-center">
             <textarea :id="'desc-'+ count"></textarea>
             <label :for="'desc-'+ count">Description</label>
         </b-col>

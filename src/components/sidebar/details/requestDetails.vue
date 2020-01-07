@@ -10,11 +10,11 @@
                     <b-container fluid class="margin-0 padding-0">
                         <b-row>
                             <b-col sm="6" md="6" class="text-center">
-                                <a class="waves-effect waves-light pink lighten-1 white-btn pulse btn">Generate
+                                <a class="white-btn pulse btn">Generate
                                     Document</a>
                             </b-col>
                             <b-col sm="6" md="6" class="text-center">
-                                <a class="waves-effect waves-light white-btn btn">Try it</a>
+                                <a class="white-btn btn">Try it</a>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -108,7 +108,7 @@
                     </b-container>
                 </div>
                 <div class="modal-footer">
-                    <a @click="closeModal" class="float-right waves-effect waves-light white-btn btn">Close</a>
+                    <a @click="closeModal" class="float-right white-btn btn">Close</a>
                 </div>
             </div>
         </div>

@@ -11,14 +11,14 @@
                     </label>
                 </div>
             </b-col>
-            <b-col sm="6" md="6" class="input-field text-center">
+            <b-col sm="6" md="6" class="text-center">
                 <input id="url" type="text">
                 <label for="url">URL</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Enter URL</span>
             </b-col>
             <b-col sm="3" md="3" class="text-center">
-                <a @click="send" class='waves-effect waves-light white-btn btn'>Send</a>
-                <a @click="showSaveRequest" class='waves-effect waves-light white-btn btn'>Save</a>
+                <a @click="send" class='white-btn btn'>Send</a>
+                <a @click="showSaveRequest" class='white-btn btn'>Save</a>
             </b-col>
         </b-row>
         <div class="divider"></div>

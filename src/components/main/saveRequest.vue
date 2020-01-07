@@ -29,7 +29,7 @@
                     </b-container>
                 </div>
                 <div class="modal-footer">
-                    <a @click="closeModal" class="float-right waves-effect waves-light white-btn btn">Close</a>
+                    <a @click="closeModal" class="float-right white-btn btn">Close</a>
                 </div>
             </div>
         </div>

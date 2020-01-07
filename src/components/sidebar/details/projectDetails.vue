@@ -9,11 +9,11 @@
                 <div class="modal-body">
                         <b-row>
                             <b-col sm="6" md="6" class="text-center">
-                                <a class="waves-effect waves-light pink lighten-1 white-btn pulse btn">Generate
+                                <a class="white-btn pulse btn">Generate
                                     Document</a>
                             </b-col>
                             <b-col sm="6" md="6" class="text-center">
-                                <a class="waves-effect waves-light white-btn btn">Export</a>
+                                <a class="white-btn btn">Export</a>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -46,10 +46,10 @@
                 <div class="modal-footer">
                     <b-row>
                         <b-col sm="6" md="6">
-                            <a class="waves-effect waves-light white-btn pink-back-btn btn">Delete</a>
+                            <a class="white-btn pink-back-btn btn">Delete</a>
                         </b-col>
                         <b-col sm="6" md="6">
-                            <a @click="closeModal" class="waves-effect waves-light white-btn btn">Close</a>
+                            <a @click="closeModal" class="white-btn btn">Close</a>
                         </b-col>
                     </b-row>
                 </div>

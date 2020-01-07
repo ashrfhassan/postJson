@@ -1,6 +1,6 @@
 <template>
     <b-row>
-        <b-col sm="12" md="12" class="input-field text-center">
+        <b-col sm="12" md="12" class="text-center">
             <select class="display-block">
                 <option value="" disabled selected>Choose your option</option>
                 <option value="1">Option 1</option>
